@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<!--
+  NAICS Size Standard Impact Tool
+  Copyright (c) 2026 The Wolverine Group, Inc. All rights reserved.
+
+  Provided free of charge for use in analyzing and commenting on SBA Docket
+  SBA-2026-0199 (Small Business Size Standards) and SBA-2026-0265. Comments
+  close September 21, 2026.
+
+  NOT LEGAL ADVICE. Output is an estimate derived from public federal spending
+  data. It is not a size determination or certification under the Small Business
+  Act or 13 CFR Part 121. Size determinations rest with SBA and the contracting
+  officer. See the full notice in the interface.
+
+  Third-party components loaded at runtime, each under its own license:
+  SheetJS Community Edition (Apache-2.0), JSZip, jsPDF.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="The Wolverine Group, Inc.">
+<meta name="copyright" content="Copyright (c) 2026 The Wolverine Group, Inc.">
+<meta name="description" content="Finds federal contractors whose small-business status would change when a NAICS size standard moves. Estimates only; not a size determination.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAICS Size Standard Impact Tool — The Wolverine Group</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+:root{
+  --navy:#0D1B3E; --navy-2:#16264F; --gold:#C8960C; --gold-soft:#FFF0CC;
+  --ink:#222222; --muted:#6B7280; --line:#DFE3EA; --band:#E8F0FA;
+  --paper:#FFFFFF; --shell:#F3F5F8; --bad:#A11B1B; --good:#1B6B3A;
+  --sans:Arial,"Helvetica Neue",Helvetica,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%}
+body{font:15px/1.55 var(--sans);color:var(--ink);background:var(--shell);
+  display:flex;min-height:100vh}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* rail */
+.rail{width:270px;flex:0 0 270px;background:var(--navy);color:#fff;padding:30px 24px;
+  display:flex;flex-direction:column;gap:30px}
+.brand{letter-spacing:.14em;font-weight:700;font-size:12px}
+.brand .logo{display:block;width:186px;height:auto;margin:-4px 0 12px -4px}
+.brand span{display:block;color:var(--gold);font-weight:400;letter-spacing:.09em;
+  font-size:11.5px;padding-top:11px;border-top:1px solid rgba(200,150,12,.35)}
+@media (max-width:820px){.brand .logo{width:150px}}
+.rail h1{font-size:19px;line-height:1.3;margin:0;font-weight:700}
+.rail .tag{color:#9FB0CE;font-size:12.5px;margin-top:7px;line-height:1.5}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.steps li{display:flex;gap:12px;align-items:baseline;padding:10px 10px;border-radius:3px;
+  font-size:13.5px;color:#9FB0CE;border-left:3px solid transparent}
+.steps li .n{font-weight:700;font-size:11.5px;min-width:14px}
+.steps li.on{background:var(--navy-2);color:#fff;border-left-color:var(--gold)}
+.steps li.done{color:#C9D6EC}
+.steps li.done .n::after{content:" ✓";color:var(--gold)}
+.rail footer{margin-top:auto;font-size:11px;color:#7488AB;line-height:1.6}
+
+/* main */
+main{flex:1;min-width:0;padding:38px 46px 60px;max-width:1080px}
+.pane{display:none}.pane.on{display:block}
+h2{font-size:23px;margin:0 0 6px;color:var(--navy);letter-spacing:.01em}
+.sub{color:var(--muted);margin:0 0 24px;max-width:66ch}
+h3{font-size:15px;color:var(--navy);margin:26px 0 10px}
+p{max-width:72ch}
+
+.drop{border:2px dashed var(--line);background:var(--paper);border-radius:5px;
+  padding:44px 28px;text-align:center;cursor:pointer;transition:border-color .15s,background .15s}
+.drop:hover,.drop.hot{border-color:var(--gold);background:#FFFDF6}
+.drop strong{display:block;font-size:16px;color:var(--navy);margin-bottom:5px}
+.drop small{color:var(--muted)}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:20px 22px;margin:16px 0}
+.note{background:var(--band);border-left:5px solid var(--gold);padding:14px 18px;margin:16px 0;
+  border-radius:0 3px 3px 0;font-size:13.5px}
+.note.warn{background:var(--gold-soft)}
+.note.stop{background:var(--navy);color:#fff}
+.note b{color:inherit}
+
+label{display:block;font-size:12.5px;color:var(--navy);font-weight:700;margin-bottom:5px}
+input[type=text],input[type=date],input[type=number],select{
+  font:14px var(--sans);padding:8px 10px;border:1px solid var(--line);border-radius:3px;
+  background:var(--paper);color:var(--ink);width:100%}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.chk{display:flex;gap:9px;align-items:flex-start;font-size:14px;font-weight:400;color:var(--ink)}
+.chk input{margin-top:3px}
+.hint{font-size:12px;color:var(--muted);margin-top:5px;font-weight:400}
+
+button{font:600 14px var(--sans);padding:11px 20px;border-radius:3px;border:1px solid var(--navy);
+  background:var(--navy);color:#fff;cursor:pointer}
+button:hover{background:var(--navy-2)}
+button.ghost{background:transparent;color:var(--navy)}
+button.ghost:hover{background:#EAEEF5}
+button.gold{background:var(--gold);border-color:var(--gold);color:#22190A}
+button.gold:hover{filter:brightness(1.07)}
+button[disabled]{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:22px}
+
+.bar{height:5px;background:var(--line);border-radius:3px;overflow:hidden;margin:14px 0 8px}
+.bar i{display:block;height:100%;background:var(--gold);width:0}
+.mono{font:12.5px/1.6 Consolas,"SF Mono",Menlo,monospace}
+
+table{border-collapse:collapse;width:100%;font-size:13px;margin-top:8px}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:700;font-size:12px}
+td{padding:7px 10px;border-bottom:1px solid #EDF0F4}
+tr:nth-child(even) td{background:#F8F9FC}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.pill{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:9px;letter-spacing:.03em}
+.LOW{background:#FBEAEA;color:var(--bad)}.MEDIUM{background:#FFF4DA;color:#7A5A05}
+.HIGH{background:#E7F3EB;color:var(--good)}
+
+.stat{display:flex;gap:40px;flex-wrap:wrap;margin:6px 0 4px}
+.stat div span{display:block;font-size:38px;font-weight:700;color:var(--navy);line-height:1.1;
+  font-variant-numeric:tabular-nums}
+.stat div small{color:var(--muted);font-size:12.5px}
+.scroll{max-height:390px;overflow:auto;border:1px solid var(--line);border-radius:4px}
+.dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:8px}
+.dl button{display:block;width:100%;text-align:left;padding:15px 17px;background:var(--paper);
+  color:var(--navy);border:1px solid var(--line)}
+.dl button:hover{border-color:var(--gold);background:#FFFDF6}
+.dl button b{display:block;font-size:14px}
+.dl button small{display:block;color:var(--muted);font-weight:400;margin-top:3px;font-size:12px}
+.disc{font-size:11.5px;color:var(--muted);line-height:1.65;margin-top:34px;
+  padding-top:16px;border-top:1px solid var(--line);max-width:none}
+@media (max-width:820px){
+  body{flex-direction:column}.rail{width:auto;flex:none}
+  .steps{flex-direction:row;overflow:auto}main{padding:26px 20px 50px}
+}
+</style>
+</head>
+<body>
+<nav class="rail">
+  <div class="brand">
+    <img src="data:image/png;base64,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" alt="The Wolverine Group" class="logo">
+    <span>Federal Acquisition Analytics</span>
+  </div>
+  <div>
+    <h1>NAICS Size Standard Impact Tool</h1>
+    <p class="tag">Finds the contractors whose small-business status would change when a size
+      standard moves.</p>
+  </div>
+  <ol class="steps" id="steps">
+    <li data-s="0" class="on"><span class="n">1</span><span>Load spending data</span></li>
+    <li data-s="1"><span class="n">2</span><span>Set scope and standards</span></li>
+    <li data-s="2"><span class="n">3</span><span>Run the analysis</span></li>
+    <li data-s="3"><span class="n">4</span><span>Results and downloads</span></li>
+  </ol>
+  <footer><b style="color:#C9D6EC">Your file never leaves this browser.</b> All processing
+    happens on your own machine.
+    <br><br><b style="color:#C9D6EC">Estimates, not determinations.</b> Not legal advice. Size
+    determinations rest with SBA and the contracting officer.
+    <br><br>© 2026 The Wolverine Group, Inc. All rights reserved. Free to use for comment on
+    SBA Docket SBA-2026-0199, which closes 21 September 2026.
+    <br><br>Built with SheetJS CE (Apache-2.0), JSZip, and jsPDF.</footer>
+</nav>
+
+<main>
+<!-- 1 -->
+<section class="pane on" id="p0">
+  <h2>Load your spending data</h2>
+  <p class="sub">Drop the ZIP you downloaded from USAspending, or the CSV from inside it.
+    Nothing is uploaded — the file is read here in your browser.</p>
+  <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose a file">
+    <strong>Drop your file here</strong>
+    <small>or click to browse — .zip or .csv</small>
+    <input type="file" id="file" accept=".csv,.zip" hidden>
+  </div>
+  <div id="loadStatus"></div>
+  <div class="note warn" id="frameWarn" style="display:none"><b>You are viewing this inside a
+    frame.</b> The analysis will run normally, but browsers block file downloads from framed
+    pages, so the download buttons at the end may do nothing.
+    <button class="ghost" style="padding:5px 12px;font-size:13px;margin-top:8px" id="popTop">
+    Open in its own tab</button></div>
+  <div class="note stop"><b>Before you start.</b> This tool estimates from federal contract
+    dollars. Size standards are based on total company revenue, including commercial work,
+    subcontracts, and affiliated companies — none of which appear in this data. Results are a
+    list of candidates worth investigating, never a determination of who is small. Not legal
+    advice.</div>
+  <div class="note"><b>Which file to download from USAspending.</b> Award Search → Advanced
+    Search → Download → Custom Award Data. Choose <b>Contracts</b> and
+    <b>Prime Award Transactions</b>, not the award summaries. Set the date range to five full
+    federal fiscal years (October 1 through September 30).</div>
+</section>
+
+<!-- 2 -->
+<section class="pane" id="p1">
+  <h2>Set scope and standards</h2>
+  <p class="sub">Confirm which codes to analyze and the two dollar thresholds the analysis
+    turns on.</p>
+  <div class="card">
+    <h3 style="margin-top:0">NAICS codes found in your file</h3>
+    <div id="naicsList"></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Size standards</h3>
+    <div id="stdBox"></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Analysis settings</h3>
+    <div class="grid">
+      <div><label for="snap">Analysis date</label>
+        <input type="date" id="snap"><div class="hint">Recorded with the results. Spending data
+        backfills, so undated output can't be reproduced.</div></div>
+      <div><label for="fyc">Fiscal years to average</label>
+        <input type="number" id="fyc" value="5" min="1" max="10">
+        <div class="hint">Five matches 13 CFR 121.104.</div></div>
+      <div><label for="lag">Defense reporting delay</label>
+        <select id="lag">
+          <option value="lagsafe">Cut off 90 days before the analysis date</option>
+          <option value="none">No adjustment</option>
+        </select><div class="hint">Defense contract actions publish 90 days late.</div></div>
+    </div>
+    <div style="margin-top:16px">
+      <label class="chk"><input type="checkbox" id="cons" checked>
+        <span>Combine companies that appear under several identifiers
+        <span class="hint" style="display:block">Recommended. Large firms fragment across
+        identifiers and look smaller than they are. Every merge is listed in the results.</span>
+        </span></label>
+    </div>
+  </div>
+  <div class="row">
+    <button class="ghost" data-go="0">Back</button>
+    <button class="gold" id="toRun">Continue</button>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="pane" id="p2">
+  <h2>Run the analysis</h2>
+  <p class="sub" id="runSummary"></p>
+  <div class="bar"><i id="bar"></i></div>
+  <div class="mono" id="log" style="color:var(--muted)"></div>
+  <div class="row">
+    <button class="ghost" data-go="1">Back</button>
+    <button class="gold" id="run">Run the analysis</button>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="pane" id="p3">
+  <h2>Results</h2>
+  <p class="sub" id="resSub"></p>
+  <div class="stat" id="stats"></div>
+  <div id="gate"></div>
+
+  <h3>Download</h3>
+  <div class="dl">
+    <button id="dlXlsx"><b>Full workbook (.xlsx)</b><small>Six tabs: validation, cohort,
+      competition split, lag ledger, diagnostics, merges</small></button>
+    <button id="dlCsv"><b>Cohort list (.csv)</b><small>One row per company in the band</small></button>
+    <button id="dlPdf"><b>Verification checklist (.docx)</b><small>Sign-off form to complete
+      before publishing any figure</small></button>
+  </div>
+
+  <h3>Draft a comment to SBA</h3>
+  <p style="max-width:72ch">Agencies must respond to significant comments. Sentiment is not
+    significant; a position backed by data is. Choose the position you want to take, and the
+    tool drafts a comment around the figures from your run. The output is an unbranded Word
+    document you can paste into your own letterhead. It runs entirely in your browser — no
+    account, no sign-in, nothing sent anywhere.</p>
+  <div class="note"><b>The tool takes no position on the rule.</b> The analysis measures; it
+    does not argue. The position below is yours, and the argument sections are written to it.
+    Read the draft before you file it — the words are submitted under your name, not ours.</div>
+  <div class="card">
+    <div style="margin-bottom:16px">
+      <label for="cPos">Your position on the proposed rule</label>
+      <select id="cPos">
+        <option value="oppose">Oppose the proposed increase</option>
+        <option value="support">Support the proposed increase</option>
+        <option value="modify">Support the increase with modifications</option>
+        <option value="data" selected>Take no position — submit data only</option>
+      </select>
+      <div class="hint">Every option produces the same measured findings in section 3. Only the
+        argument sections change.</div>
+    </div>
+    <div class="grid">
+      <div><label for="cCo">Company type</label>
+        <input type="text" id="cCo" placeholder="e.g. management consulting firm"></div>
+      <div><label for="cRec">Five-year average receipts</label>
+        <input type="number" id="cRec" placeholder="41200000"></div>
+      <div><label for="cEmp">Employees</label>
+        <input type="number" id="cEmp" placeholder="210"></div>
+      <div><label for="cNaics">Your primary NAICS</label>
+        <input type="text" id="cNaics" placeholder="541611"></div>
+      <div><label for="cYrs">Years in the federal market</label>
+        <input type="number" id="cYrs" placeholder="18"></div>
+      <div><label for="cDisp">Set-aside dollars in the affected market</label>
+        <input type="number" id="cDisp" placeholder="8400000">
+        <div class="hint">From your own records. How it is characterized follows your position.
+          Leave blank if you have not computed it.</div></div>
+    </div>
+    <div class="note warn" style="margin-bottom:0"><b>Every figure in a comment must be one you
+      can source.</b> One bad number gets the whole submission discounted. The tool cites only
+      the figures from your run and the ones you enter here, and flags anything in the draft it
+      cannot trace.</div>
+    <div class="row" style="margin-top:16px">
+      <button class="gold" id="draftLetter">Draft the comment</button>
+      <span id="letterMsg" class="hint" style="margin:0"></span>
+    </div>
+    <div id="letterOut"></div>
+  </div>
+
+  <h3>Companies in the band</h3>
+  <div class="scroll"><table id="tbl"></table></div>
+
+  <div class="note stop"><b>Read this before using any of these numbers.</b>
+    This tool measures federal contract dollars. Size standards measure total company revenue —
+    commercial work, subcontracts, and affiliated companies all count toward a size
+    determination and none of them appear in this data. A company can look small here and be
+    well over the threshold in reality. What you have is a ranked list of candidates worth
+    investigating, not a determination of who is small.</div>
+
+  <div class="row"><button class="ghost" data-go="1">Change settings</button>
+    <button class="ghost" onclick="location.reload()">Start over</button></div>
+
+  <p class="disc">Disclaimer. This tool is provided by The Wolverine Group, Inc. for general
+  informational and educational purposes only. It reflects business and practitioner guidance,
+  not legal, financial, or tax advice, and it does not create an attorney-client, advisory, or
+  fiduciary relationship of any kind. The tool produces estimates derived from public federal
+  spending data; it does not and cannot determine any firm's size status under the Small
+  Business Act or 13 CFR Part 121, and its output is not a size determination, a size
+  certification, or a substitute for either. Size standards, size determinations, affiliation,
+  and eligibility rest with the U.S. Small Business Administration and the contracting officer,
+  and turn on facts not present in this data, including total receipts from all sources and the
+  applicable regulation as then in effect. Proposed rules are subject to change or withdrawal
+  and confer no rights; nothing here should be read as a recommendation to alter a size
+  representation, certification, teaming arrangement, or bid strategy. Any regulatory
+  submission, teaming agreement, or business decision informed by this material should be
+  reviewed by qualified legal counsel and, where appropriate, a financial or tax professional,
+  before action is taken, and every threshold and citation should be verified against primary
+  sources. The Wolverine Group, Inc. makes no representations or warranties as to the accuracy,
+  completeness, or suitability of this material for your situation, and disclaims, to the
+  fullest extent permitted by law, any liability for decisions made or actions taken in reliance
+  on it. You remain solely responsible for your own business decisions.</p>
+</section>
+</main>
+
+<script>
+(function(){var framed;try{framed=window.self!==window.top;}catch(e){framed=true;}
+ if(framed){var w=document.getElementById('frameWarn');if(w){w.style.display='';
+   var b=document.getElementById('popTop');if(b)b.onclick=function(){
+     try{window.open(location.href,'_blank');}catch(e){
+       alert('Your browser blocked that. Copy this page address into a new tab.');}};}}})();
+</script>
+<script>/* Minimal .docx writer. Builds OOXML by hand and zips it with JSZip.
+   No styles.xml — all formatting is inline, so the file opens anywhere and
+   pastes cleanly into someone else's template. */
+(function (root) {
+'use strict';
+
+const esc = s => String(s == null ? '' : s)
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/* run: {t, b, i, sz (half-points), color, font, spacing (char spacing), br} */
+function run(r) {
+  if (r.br) return '<w:r><w:br/></w:r>';
+  const p = [];
+  if (r.font) p.push('<w:rFonts w:ascii="' + r.font + '" w:hAnsi="' + r.font + '"/>');
+  if (r.b) p.push('<w:b/>');
+  if (r.i) p.push('<w:i/>');
+  if (r.color) p.push('<w:color w:val="' + r.color + '"/>');
+  if (r.spacing) p.push('<w:spacing w:val="' + r.spacing + '"/>');
+  if (r.sz) p.push('<w:sz w:val="' + r.sz + '"/><w:szCs w:val="' + r.sz + '"/>');
+  const rPr = p.length ? '<w:rPr>' + p.join('') + '</w:rPr>' : '';
+  return '<w:r>' + rPr + '<w:t xml:space="preserve">' + esc(r.t) + '</w:t></w:r>';
+}
+
+/* para: {runs:[], before, after, align, indent, hanging, shade, ruleBelow, ruleColor, keepNext} */
+function para(o) {
+  o = o || {};
+  const p = [];
+  if (o.align) p.push('<w:jc w:val="' + o.align + '"/>');
+  if (o.indent || o.hanging) {
+    p.push('<w:ind' + (o.indent ? ' w:left="' + o.indent + '"' : '')
+      + (o.hanging ? ' w:hanging="' + o.hanging + '"' : '') + '/>');
+  }
+  if (o.shade) p.push('<w:shd w:val="clear" w:color="auto" w:fill="' + o.shade + '"/>');
+  if (o.ruleBelow) {
+    p.push('<w:pBdr><w:bottom w:val="single" w:sz="' + (o.ruleSize || 12)
+      + '" w:space="4" w:color="' + (o.ruleColor || 'C7950B') + '"/></w:pBdr>');
+  }
+  if (o.keepNext) p.push('<w:keepNext/>');
+  p.push('<w:spacing w:before="' + (o.before || 0) + '" w:after="'
+    + (o.after == null ? 120 : o.after) + '" w:line="' + (o.line || 276)
+    + '" w:lineRule="auto"/>');
+  const pPr = '<w:pPr>' + p.join('') + '</w:pPr>';
+  return '<w:p>' + pPr + (o.runs || []).map(run).join('') + '</w:p>';
+}
+
+const spacer = h => para({ runs: [], after: h == null ? 120 : h });
+
+/* table: rows = [[cellText|{t,b,color,shade,align}]], widths in dxa */
+function table(rows, widths, opt) {
+  opt = opt || {};
+  const bw = opt.borderColor === null ? null : (opt.borderColor || 'CFCFCF');
+  const edge = n => bw ? '<w:' + n + ' w:val="single" w:sz="4" w:space="0" w:color="' + bw + '"/>'
+                       : '<w:' + n + ' w:val="none" w:sz="0" w:space="0" w:color="FFFFFF"/>';
+  const borders = '<w:tblBorders>' + ['top', 'left', 'bottom', 'right', 'insideH', 'insideV']
+    .map(edge).join('') + '</w:tblBorders>';
+  const grid = '<w:tblGrid>' + widths.map(w => '<w:gridCol w:w="' + w + '"/>').join('') + '</w:tblGrid>';
+  const body = rows.map((r, ri) => '<w:tr>' + r.map((c, ci) => {
+    const o = (typeof c === 'object' && c !== null) ? c : { t: c };
+    const shade = o.shade || (ri === 0 && opt.headerFill ? opt.headerFill
+      : (opt.zebra && ri % 2 === 0 ? 'F5F5F5' : null));
+    return '<w:tc><w:tcPr><w:tcW w:w="' + widths[ci] + '" w:type="dxa"/>'
+      + (shade ? '<w:shd w:val="clear" w:color="auto" w:fill="' + shade + '"/>' : '')
+      + '<w:tcMar><w:top w:w="70" w:type="dxa"/><w:bottom w:w="70" w:type="dxa"/>'
+      + '<w:left w:w="110" w:type="dxa"/><w:right w:w="110" w:type="dxa"/></w:tcMar>'
+      + '</w:tcPr>'
+      + para({ runs: [{ t: o.t, b: o.b, color: o.color, sz: o.sz || 19, font: opt.font }],
+               after: 0, align: o.align, line: 250 })
+      + '</w:tc>';
+  }).join('') + '</w:tr>').join('');
+  return '<w:tbl><w:tblPr><w:tblW w:w="' + widths.reduce((a, b) => a + b, 0)
+    + '" w:type="dxa"/>' + borders + '</w:tblPr>' + grid + body + '</w:tbl>';
+}
+
+/* page: {w,h,top,right,bottom,left} in twips */
+function build(bodyXml, page) {
+  page = page || {};
+  const sect = '<w:sectPr><w:pgSz w:w="' + (page.w || 12240) + '" w:h="' + (page.h || 15840)
+    + '"/><w:pgMar w:top="' + (page.top || 1440) + '" w:right="' + (page.right || 1440)
+    + '" w:bottom="' + (page.bottom || 1440) + '" w:left="' + (page.left || 1440)
+    + '" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>';
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
+    + '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
+    + '<w:body>' + bodyXml + sect + '</w:body></w:document>';
+}
+
+const CONTENT_TYPES = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+  + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+  + '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+  + '<Default Extension="xml" ContentType="application/xml"/>'
+  + '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>'
+  + '</Types>';
+
+const RELS = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+  + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+  + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>'
+  + '</Relationships>';
+
+const DOC_RELS = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+  + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>';
+
+/* Returns a Promise<Blob> */
+function pack(documentXml) {
+  const zip = new JSZip();
+  zip.file('[Content_Types].xml', CONTENT_TYPES);
+  zip.folder('_rels').file('.rels', RELS);
+  const w = zip.folder('word');
+  w.file('document.xml', documentXml);
+  w.folder('_rels').file('document.xml.rels', DOC_RELS);
+  return zip.generateAsync({
+    type: 'blob',
+    mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    compression: 'DEFLATE'
+  });
+}
+
+root.DocX = { run, para, spacer, table, build, pack, esc };
+
+})(typeof module !== 'undefined' && module.exports ? module.exports : (this.window = this.window || this));
+</script>
+<script>/* Composes the five-section comment deterministically, in the browser, with no
+   network call.
+
+   THE TOOL TAKES NO POSITION ON THE RULE. The filer chooses one and the argument
+   sections are written to it. The measured findings in section 3 are identical
+   across every position; only the lead-in sentence differs, because the data
+   does not change with the filer's view of it. Sections 1, 3 and 5 are built from the filer's own figures and
+   differ between filers. Sections 2 and 4 are record-based arguments that will
+   read alike across submissions — the tool says so and tells the filer to
+   rewrite them, because identical prose is what gets a comment discounted. */
+(function (root) {
+'use strict';
+
+const usd = v => v == null ? null : (v >= 1e9 ? '$' + (v / 1e9).toFixed(2) + ' billion'
+  : v >= 1e6 ? '$' + (v / 1e6).toFixed(1) + ' million' : '$' + Math.round(v).toLocaleString());
+const n = v => Number(v).toLocaleString();
+
+const POSITIONS = {
+  oppose:  { label: 'Oppose the proposed increase' },
+  support: { label: 'Support the proposed increase' },
+  modify:  { label: 'Support the increase with modifications' },
+  data:    { label: 'Take no position \u2014 submit data only' }
+};
+
+function compose(o) {
+  const pos = POSITIONS[o.position] ? o.position : 'data';
+  // o: {companyType, naics, years, receipts, employees, displacement,
+  //     inBand, above, boundary, cohortObl, medianUnres, ge95, population,
+  //     scope[], fyWindow[], lower, hi}
+  const S = [];
+  const firmNaics = o.naics || (o.scope && o.scope[0]) || 'the analyzed code';
+  const co = o.companyType || 'a small business';
+  const winTxt = o.fyWindow && o.fyWindow.length
+    ? 'FY' + o.fyWindow[0] + ' through FY' + o.fyWindow[o.fyWindow.length - 1] : 'the analyzed period';
+  const loTxt = usd(o.lower), hiTxt = usd(o.hi);
+
+  /* ---- 1. Standing and stake ---- */
+  const who = 'We are ' + co + ' competing under NAICS ' + firmNaics
+    + (o.years ? ', with ' + n(o.years) + ' years in the federal market' : '')
+    + (o.receipts ? ' and ' + usd(o.receipts) + ' in five-year average annual receipts' : '')
+    + (o.employees ? ' across ' + n(o.employees) + ' employees' : '') + '.';
+  const stake = {
+    oppose: 'Raising the size standard for this industry group to ' + hiTxt + ' would place us '
+      + 'in direct competition, inside the small business set-aside pool, with firms whose '
+      + 'federal contract volume is a multiple of our own, and we submit these comments in '
+      + 'opposition on the basis of our own analysis of the public award record.',
+    support: 'Raising the size standard for this industry group to ' + hiTxt + ' would allow '
+      + 'firms that have outgrown an outdated threshold to continue competing as small '
+      + 'businesses, and we submit these comments in support on the basis of our own analysis '
+      + 'of the public award record.',
+    modify: 'Raising the size standard for this industry group to ' + hiTxt + ' addresses a '
+      + 'threshold that has not kept pace with the market, but the single group-wide figure as '
+      + 'proposed creates problems the record does not address. We submit these comments in '
+      + 'support of the change with modifications, on the basis of our own analysis of the '
+      + 'public award record.',
+    data: 'We take no position for or against the proposed change. We submit the analysis below '
+      + 'so that it is available on the record, because we have not seen this measurement '
+      + 'published elsewhere and it bears on the effects SBA is required to consider.'
+  }[pos];
+  S.push(['1. Standing and stake', who + ' ' + stake]);
+
+  /* ---- 2. The 45 industries where no reduction is proposed ---- */
+  S.push({
+    oppose: ['2. The decision not to reduce any standard is inconsistent with the record',
+      'SBA states that it proposes not to reduce any size standard that retains the same '
+      + 'measure, including in the 45 industries where its own analysis supported a decrease. '
+      + 'That decision cannot be reconciled with the basis given for the increases. The same '
+      + 'revised methodology, applied to the same data, produces both results. If the '
+      + 'methodology is sound enough to justify raising a threshold by an order of magnitude, '
+      + 'it is sound enough to justify lowering one; if it is not reliable where it points '
+      + 'downward, SBA has not explained why it is reliable where it points upward.\n\n'
+      + 'Applying an analytical method only where its output favors larger firms is outcome '
+      + 'selection, not reasoned decisionmaking. We ask SBA to either implement the decreases '
+      + 'its analysis supports, or state on the record the specific factors that make the '
+      + 'methodology unreliable in those 45 industries and explain why those same factors do '
+      + 'not undermine the increases proposed elsewhere. A general statement that SBA is '
+      + 'exercising discretion does not answer the question, because the exercise of discretion '
+      + 'is what requires explanation.'],
+    support: ['2. The decision not to reduce any standard is appropriate and should be retained',
+      'SBA proposes not to reduce any size standard that retains the same measure, including in '
+      + 'the 45 industries where its own analysis supported a decrease. We support that decision '
+      + 'and ask that it be retained in the final rule.\n\n'
+      + 'Size standards function as planning assumptions. Firms make hiring, facility, and '
+      + 'capital decisions years ahead on the basis of the pool they expect to compete in, and a '
+      + 'reduction removes eligibility from firms that have already committed against it. The '
+      + 'effect is asymmetric: a firm that gains eligibility gains an opportunity, while a firm '
+      + 'that loses it loses a business line already built. We ask SBA to state that reasoning '
+      + 'expressly in the final rule, so the decision rests on a stated rationale rather than on '
+      + 'the absence of one, which would leave it vulnerable on review.'],
+    modify: ['2. The asymmetric treatment of increases and decreases needs a stated rationale',
+      'SBA proposes not to reduce any size standard that retains the same measure, including in '
+      + 'the 45 industries where its own analysis supported a decrease. We do not object to that '
+      + 'outcome, and there are sound reasons for it: firms plan against the pool they expect to '
+      + 'compete in, and withdrawing eligibility disrupts commitments already made.\n\n'
+      + 'The difficulty is that the rule does not say so. As drafted, the same methodology '
+      + 'applied to the same data produces increases that are adopted and decreases that are '
+      + 'not, with no stated basis for the distinction. That is a vulnerability on review and it '
+      + 'invites the objection that the method was applied selectively. We ask SBA to state '
+      + 'expressly why stability weighs against implementing the decreases, and to explain why '
+      + 'the same considerations do not qualify the increases.'],
+    data: ['2. Observation: increases and decreases are treated differently in the record',
+      'SBA proposes not to reduce any size standard that retains the same measure, including in '
+      + 'the 45 industries where its own analysis supported a decrease. We note the asymmetry '
+      + 'without arguing for a particular resolution. The same revised methodology, applied to '
+      + 'the same data, produces both results, and the record as published does not state the '
+      + 'basis for adopting one direction and not the other.\n\n'
+      + 'We raise it because the basis matters to how the derived standards should be read, '
+      + 'whichever way SBA resolves it, and because a stated rationale would make the final rule '
+      + 'more defensible than an unstated one.']
+  }[pos]);
+
+  /* 3 — firm-level displacement, built from the filer's own figures */
+  const d = [{
+    oppose: 'The following is drawn from the public award record and bears on the competitive '
+      + 'effects of the proposed change.',
+    support: 'The following is drawn from the public award record and shows the size of the '
+      + 'population the proposed change would affect.',
+    modify: 'The following is drawn from the public award record and identifies the specific '
+      + 'feature of the proposal that our modification addresses.',
+    data: 'The following is drawn from the public award record and is offered without argument, '
+      + 'for SBA to weigh as it sees fit.'
+  }[pos]];
+  d.push('We analyzed prime contract transactions reported to USAspending for NAICS '
+    + (o.scope || []).join(', ') + ' across ' + winTxt + ', covering ' + n(o.population)
+    + ' distinct contracting entities after consolidating affiliated identifiers.');
+  d.push('Applying the current standard of ' + loTxt + ' and the proposed standard of ' + hiTxt
+    + ', ' + n(o.inBand) + ' firms fall between the two thresholds on federal prime contract '
+    + 'obligations alone. Those firms accounted for ' + usd(o.cohortObl)
+    + ' in obligations over the period. A further ' + n(o.above) + ' exceed the proposed '
+    + 'threshold on federal obligations alone and would remain outside the pool.');
+  d.push('The competitive character of that group is the material finding. The median share of '
+    + 'obligations won through full and open or otherwise unrestricted competition is '
+    + o.medianUnres + ' percent, and ' + n(o.ge95) + ' of the ' + n(o.inBand)
+    + ' firms took at least 95 percent of their obligations that way. These are firms that have '
+    + 'competed successfully in unrestricted procurement and would be entering the set-aside '
+    + 'pool for the first time rather than moving between small business pools.');
+  if (o.displacement) {
+    d.push(pos === 'support' || pos === 'data'
+      ? 'Against our own pipeline we identify ' + usd(o.displacement) + ' in set-aside '
+        + 'obligations in the affected market. That figure is drawn from our records.'
+      : 'Against our own pipeline we project ' + usd(o.displacement) + ' in set-aside '
+        + 'obligations at risk of displacement. That figure is drawn from our records and '
+        + 'reflects opportunities we would expect to face these firms on directly.');
+  } else {
+    d.push('[Insert your own figure here, drawn from your pipeline or award history, and state '
+      + 'how you derived it. A firm-specific number is what makes this section evidence rather '
+      + 'than assertion.]');
+  }
+  d.push('One qualification, stated plainly because it bears on the weight of this evidence: '
+    + 'these figures are federal prime contract obligations, not receipts as defined at 13 CFR '
+    + '121.104. Receipts include commercial revenue, subcontract revenue, and the revenue of '
+    + 'affiliates, none of which appear in the public award record. The cohort identified above '
+    + 'is therefore a lower bound on the population whose status would change, and the firms at '
+    + 'the top of it are the least likely to actually re-enter the pool.');
+  S.push(['3. What the award record shows in our market', d.join('\n\n')]);
+
+  /* ---- 4. Simultaneous issuance of the methodology and the derived standards ---- */
+  S.push({
+    oppose: ['4. The methodology and the standards derived from it should not be finalized together',
+      'SBA published the revised methodology and the standards derived from it on the same day, '
+      + 'under a single comment period, and states that the methodology analysis is incorporated '
+      + 'into the rule. This forecloses meaningful comment on the methodology itself. A '
+      + 'commenter who believes the derivation is flawed must critique the derivation and its '
+      + 'output simultaneously, without knowing which elements SBA will retain, and without an '
+      + 'opportunity to comment on standards recalculated under a corrected method.\n\n'
+      + 'The consequence is practical, not merely procedural. Two changes drive the magnitude of '
+      + 'the increases: removal of the ceiling that previously capped receipts-based standards, '
+      + 'and the addition of a productivity adjustment. Neither has been separately tested '
+      + 'against comment. If either is revised, every derived standard changes, and the public '
+      + 'will have had no opportunity to comment on the standards that actually result.\n\n'
+      + 'We request that SBA resolve the methodology docket first, publish the standards derived '
+      + 'from the finalized methodology, and provide a further opportunity for comment before '
+      + 'they take effect.'],
+    support: ['4. The rule should be finalized without procedural delay',
+      'SBA published the revised methodology and the standards derived from it together, under a '
+      + 'single comment period. We support proceeding on that basis. The methodology and its '
+      + 'output appear in the same record, commenters can see how each standard was derived, and '
+      + 'separating them would add a full rulemaking cycle without improving the information '
+      + 'available.\n\n'
+      + 'Delay is not neutral. For every month the current thresholds remain in force, firms the '
+      + 'revised analysis identifies as small continue to be excluded from the pool. We ask SBA '
+      + 'to complete this rulemaking on the current schedule, and to state in the final rule that '
+      + 'the methodology record was open to comment alongside the derived standards, so that the '
+      + 'procedural sufficiency of this approach is addressed rather than assumed.'],
+    modify: ['4. The methodology should be resolved on the record before the standards take effect',
+      'SBA published the revised methodology and the standards derived from it together, under a '
+      + 'single comment period. We do not ask SBA to withdraw the rule or restart the process. We '
+      + 'ask that the methodology comments be resolved and addressed on the record before the '
+      + 'derived standards take effect.\n\n'
+      + 'Two changes drive the magnitude of the increases: removal of the ceiling that previously '
+      + 'capped receipts-based standards, and the addition of a productivity adjustment. If '
+      + 'either is revised in response to comment, every derived standard changes. A final rule '
+      + 'that responds to the methodology comments and then states the resulting standards, with '
+      + 'a short confirmation period, would hold to substantially the same timeline while curing '
+      + 'the procedural gap.'],
+    data: ['4. Observation: the methodology and the derived standards share one comment period',
+      'SBA published the revised methodology and the standards derived from it on the same day, '
+      + 'under a single comment period, and states that the methodology analysis is incorporated '
+      + 'into the rule. We note the structure without asking for a particular remedy.\n\n'
+      + 'The practical consequence is that comments on the derivation and comments on its output '
+      + 'arrive together. Two changes drive the magnitude of the increases: removal of the '
+      + 'ceiling on receipts-based standards, and the addition of a productivity adjustment. If '
+      + 'either is revised in response to comment, the derived standards change. We note this so '
+      + 'the record reflects the dependency.']
+  }[pos]);
+
+  /* ---- 5. What the filer asks SBA to do ---- */
+  const t1 = Math.round(o.hi * 0.25 / 1e6) * 1e6;
+  const t2 = Math.round(o.hi * 0.55 / 1e6) * 1e6;
+  const tierText = '"For each industry group for which a receipts-based size standard is '
+    + 'established under this section, the standard shall be expressed in three tiers. Tier 1 '
+    + 'shall consist of concerns whose average annual receipts do not exceed ' + usd(t1)
+    + '. Tier 2 shall consist of concerns whose average annual receipts exceed ' + usd(t1)
+    + ' but do not exceed ' + usd(t2) + '. Tier 3 shall consist of concerns whose average annual '
+    + 'receipts exceed ' + usd(t2) + ' but do not exceed ' + hiTxt + '. A concern in any tier '
+    + 'qualifies as a small business concern for the industry group. A contracting officer '
+    + 'setting aside a requirement under part 125 of this chapter may restrict the set-aside to '
+    + 'concerns in a specified tier where the contracting officer determines that competition '
+    + 'among concerns in that tier is adequate, and shall document that determination in the '
+    + 'contract file."';
+  const tierNote = 'The tier boundaries above are illustrative and derived proportionally from '
+    + 'the proposed threshold; SBA is better positioned to set them from the underlying receipts '
+    + 'distribution.';
+
+  S.push({
+    oppose: ['5. A specific alternative: tiered thresholds within each industry group',
+      'A single group-wide threshold of ' + hiTxt + ' treats a firm at ' + loTxt + ' and a firm '
+      + 'at ' + hiTxt + ' as equivalent competitors. They are not. If SBA proceeds, we propose '
+      + 'tiered thresholds within each industry group, so that set-asides can be scoped to a '
+      + 'tier rather than to the whole group. SBA could adopt language along the following lines '
+      + 'in 13 CFR 121.201:\n\n' + tierText + '\n\n'
+      + 'This preserves the effect SBA intends, which is to return capable firms to the small '
+      + 'business pool, while giving contracting officers a means of preventing the largest '
+      + 'newly eligible firms from absorbing requirements scaled for much smaller ones. It '
+      + 'requires no change to the methodology and no reduction in any threshold. ' + tierNote],
+    support: ['5. What we ask SBA to do',
+      'We ask SBA to adopt the proposed standard of ' + hiTxt + ' for this industry group as '
+      + 'published, and to add a review provision so the threshold does not again fall out of '
+      + 'step with the market. SBA could adopt language along the following lines in 13 CFR '
+      + '121.201:\n\n'
+      + '"Each receipts-based size standard established under this section shall be reviewed not '
+      + 'less than every five years and adjusted for inflation not less than every two years. '
+      + 'SBA shall publish the result of each review, including any determination that no '
+      + 'adjustment is warranted and the basis for that determination."\n\n'
+      + 'The value of the proposed increase depends on it not becoming stale. A scheduled review '
+      + 'with a published result, including a published no-change determination, would keep the '
+      + 'standards current without requiring a full rulemaking each cycle, and would give firms '
+      + 'a predictable basis for planning.'],
+    modify: ['5. A specific modification: tiered thresholds within each industry group',
+      'We support raising the threshold. Our concern is the single group-wide figure. A standard '
+      + 'of ' + hiTxt + ' treats a firm at ' + loTxt + ' and a firm at ' + hiTxt + ' as '
+      + 'equivalent competitors, and contracting officers have no mechanism to distinguish '
+      + 'between them. We propose tiered thresholds within each industry group. SBA could adopt '
+      + 'language along the following lines in 13 CFR 121.201:\n\n' + tierText + '\n\n'
+      + 'This preserves the effect SBA intends while giving contracting officers a means of '
+      + 'scoping a requirement to firms of comparable scale. It requires no change to the '
+      + 'methodology and no reduction in any threshold. ' + tierNote],
+    data: ['5. What we ask SBA to consider',
+      'We make no recommendation on the threshold itself. We ask only that SBA consider, in '
+      + 'whatever direction it resolves this rulemaking, whether a single group-wide figure is '
+      + 'the right instrument, given that it treats a firm at ' + loTxt + ' and a firm at '
+      + hiTxt + ' as equivalent competitors within the same set-aside pool.\n\n'
+      + 'One structural option, offered without advocacy, is tiered thresholds within each '
+      + 'industry group, under which a contracting officer could scope a set-aside to a tier '
+      + 'where competition within that tier is adequate. Such an approach would require no '
+      + 'change to the methodology and no reduction in any threshold. We have not modeled its '
+      + 'effects and do not assert that it is preferable; we note it as a design the record does '
+      + 'not currently address.\n\n'
+      + 'We are willing to make our underlying analysis available to SBA on request.']
+  }[pos]);
+
+  const words = S.reduce((a, s) => a + s[1].split(/\s+/).length, 0);
+  const derived = (pos === 'oppose' || pos === 'modify') ? [
+    ['D1', 'Illustrative Tier 1 ceiling, derived as 25 percent of the proposed standard', t1, 'usd'],
+    ['D2', 'Illustrative Tier 2 ceiling, derived as 55 percent of the proposed standard', t2, 'usd']
+  ] : [];
+  return { sections: S, words, derived, position: pos, positionLabel: POSITIONS[pos].label };
+}
+
+root.LetterComposer = { compose, POSITIONS };
+
+})(typeof module !== 'undefined' && module.exports ? module.exports : (this.window = this.window || this));
+</script>
+<script>/* NAICS Size Standard Impact Tool - analysis engine (no DOM, no I/O) */
+(function (root) {
+'use strict';
+
+const TAX = {
+  setAside: {
+    '': 'NOT_SET_ASIDE', 'NONE': 'NOT_SET_ASIDE',
+    'SBA': 'SB_SET_ASIDE_TOTAL', 'SBP': 'SB_SET_ASIDE_PARTIAL', 'ESB': 'SB_SET_ASIDE_TOTAL',
+    '8A': '8A_COMPETED', '8AN': '8A_SOLE_SOURCE',
+    'SDVOSBC': 'SDVOSB', 'SDVOSBS': 'SDVOSB',
+    'WOSB': 'WOSB_EDWOSB', 'WOSBSS': 'WOSB_EDWOSB',
+    'EDWOSB': 'WOSB_EDWOSB', 'EDWOSBSS': 'WOSB_EDWOSB',
+    'HZC': 'HUBZONE', 'HZS': 'HUBZONE',
+    'VSA': 'VETERAN', 'VSS': 'VETERAN',
+    'ISBEE': 'INDIAN_ENTERPRISE', 'IEE': 'INDIAN_ENTERPRISE', 'BI': 'INDIAN_ENTERPRISE'
+  },
+  // true = counts as full and open
+  extent: { 'A': true, 'D': true, 'B': false, 'C': false, 'E': false,
+            'F': false, 'G': false, 'CDO': false, 'NDO': false },
+  dodCodes: new Set(['097']),
+  dodMarkers: ['DEPARTMENT OF DEFENSE', 'DEPARTMENT OF THE ARMY', 'DEPARTMENT OF THE NAVY',
+               'DEPARTMENT OF THE AIR FORCE', 'DEFENSE LOGISTICS AGENCY',
+               'ARMY CORPS OF ENGINEERS', 'DEPARTMENT OF WAR'],
+  currentStandards: {
+    '541611': 24500000, '541612': 29000000, '541613': 19000000, '541614': 20000000,
+    '541618': 19000000, '541620': 19000000, '541690': 19000000
+  },
+  proposedByGroup: { '5416': 295000000 },
+  benchmarks: { '541611': 1818, '541620': 596, '541690': 719, '541990': 1427 }
+};
+
+const ALIASES = {
+  uei: ['recipient_uei', 'recipient_uei_number', 'awardee_or_recipient_uei'],
+  name: ['recipient_name', 'awardee_or_recipient_legal'],
+  parentUei: ['recipient_parent_uei', 'recipient_parent_uei_number', 'ultimate_parent_uei'],
+  parentName: ['recipient_parent_name', 'ultimate_parent_legal_entity_name'],
+  date: ['action_date'],
+  obl: ['federal_action_obligation'],
+  naics: ['naics_code', 'naics'],
+  agencyName: ['awarding_agency_name', 'awarding_agency'],
+  agencyCode: ['awarding_agency_code'],
+  setAside: ['type_of_set_aside_code', 'type_of_set_aside'],
+  extent: ['extent_competed_code', 'extent_competed']
+};
+const REQUIRED = ['uei', 'date', 'obl'];
+
+const norm = s => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+
+function splitCSV(line) {
+  const out = []; let cur = '', q = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (q) {
+      if (c === '"') { if (line[i + 1] === '"') { cur += '"'; i++; } else q = false; }
+      else cur += c;
+    } else if (c === '"') q = true;
+    else if (c === ',') { out.push(cur); cur = ''; }
+    else cur += c;
+  }
+  out.push(cur);
+  return out;
+}
+
+function resolveColumns(header) {
+  const lookup = {};
+  header.forEach((h, i) => { lookup[norm(h)] = i; });
+  const idx = {}, missing = [];
+  for (const [logical, cands] of Object.entries(ALIASES)) {
+    const hit = cands.map(norm).find(c => c in lookup);
+    if (hit !== undefined) idx[logical] = lookup[hit]; else missing.push(logical);
+  }
+  const hard = missing.filter(m => REQUIRED.includes(m));
+  return { idx, missing, hard };
+}
+
+const fiscalYear = d => (d.getUTCMonth() >= 9 ? d.getUTCFullYear() + 1 : d.getUTCFullYear());
+
+function lastCompleteFY(cutoff) {
+  const y = cutoff.getUTCFullYear();
+  const end = Date.UTC(y, 8, 30);
+  return cutoff.getTime() >= end ? y : y - 1;
+}
+
+const LEGAL = [' INCORPORATED', ' CORPORATION', ' LIMITED', ' COMPANY', ' HOLDINGS',
+               ' INC', ' LLC', ' LLP', ' LP', ' CORP', ' LTD', ' CO', ' PLLC', ' PC'];
+
+function nameKey(s) {
+  let t = String(s || '').toUpperCase().replace(/[^A-Z ]/g, ' ').replace(/\s+/g, ' ').trim();
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const suf of LEGAL) {
+      if (t.endsWith(suf)) { t = t.slice(0, -suf.length).trim(); changed = true; }
+    }
+  }
+  return t.replace(/\s+/g, ' ').trim();
+}
+
+/* ---- accumulator: one pass over rows, bounded memory ---- */
+
+function makeAccumulator(opts) {
+  return {
+    opts, entities: new Map(),
+    rows: 0, kept: 0, dropped: 0, withParent: 0,
+    naicsSeen: new Map(), setAsideSeen: new Map(), extentSeen: new Map(),
+    fySeg: new Map()
+  };
+}
+
+function bump(map, key, obl) {
+  const e = map.get(key) || { obl: 0, n: 0 };
+  e.obl += obl; e.n += 1; map.set(key, e);
+}
+
+function addRow(acc, cols, idx) {
+  acc.rows++;
+  const uei = (cols[idx.uei] || '').trim().toUpperCase();
+  const rawDate = (cols[idx.date] || '').trim();
+  if (!uei || !rawDate) { acc.dropped++; return; }
+  const d = new Date(rawDate + 'T00:00:00Z');
+  if (isNaN(d.getTime())) { acc.dropped++; return; }
+
+  const naics = idx.naics !== undefined ? (cols[idx.naics] || '').trim() : '';
+  bump(acc.naicsSeen, naics || '(blank)', 0);
+  if (acc.opts.scope && acc.opts.scope.length && naics && !acc.opts.scope.includes(naics)) return;
+  if (acc.opts.cutoff && d.getTime() > acc.opts.cutoff) return;
+
+  const obl = parseFloat(String(cols[idx.obl] || '0').replace(/[$,]/g, '')) || 0;
+  const fy = fiscalYear(d);
+  acc.kept++;
+
+  const pRaw = idx.parentUei !== undefined ? (cols[idx.parentUei] || '').trim().toUpperCase() : '';
+  const hasParent = pRaw && !['NAN', 'NONE', 'NULL', 'N/A', 'UNKNOWN'].includes(pRaw);
+  if (hasParent) acc.withParent++;
+  const pid = hasParent ? pRaw : uei;
+
+  const agName = idx.agencyName !== undefined ? (cols[idx.agencyName] || '').toUpperCase() : '';
+  const agCode = idx.agencyCode !== undefined ? (cols[idx.agencyCode] || '').trim() : '';
+  const isDod = TAX.dodCodes.has(agCode) || TAX.dodMarkers.some(m => agName.includes(m));
+
+  const sa = idx.setAside !== undefined ? (cols[idx.setAside] || '').trim().toUpperCase() : '';
+  const ex = idx.extent !== undefined ? (cols[idx.extent] || '').trim().toUpperCase() : '';
+  bump(acc.setAsideSeen, sa || '(blank)', obl);
+  bump(acc.extentSeen, ex || '(blank)', obl);
+
+  let cat, mapped = true;
+  const saBucket = TAX.setAside[sa];
+  if (saBucket !== undefined && saBucket !== 'NOT_SET_ASIDE') cat = saBucket;
+  else if (saBucket === undefined && sa !== '') { cat = 'OTHER'; mapped = false; }
+  else {
+    const fo = TAX.extent[ex];
+    if (fo === undefined) { cat = 'OTHER'; mapped = ex === ''; }
+    else cat = fo ? 'FULL_AND_OPEN' : 'UNRESTRICTED_OTHER_THAN_F&O';
+  }
+  if (!mapped) { /* surfaced via Diagnostics */ }
+
+  const segKey = fy + '|' + (isDod ? 'DOD_USACE' : 'CIVILIAN');
+  bump(acc.fySeg, segKey, obl);
+
+  let e = acc.entities.get(pid);
+  if (!e) {
+    e = { pid, names: new Map(), children: new Set(), fy: new Map(), naics: new Map(),
+          cat: new Map(), catFy: new Map(), dod: 0, total: 0, maxAction: 0 };
+    acc.entities.set(pid, e);
+  }
+  const pName = (idx.parentName !== undefined && hasParent && (cols[idx.parentName] || '').trim())
+    ? cols[idx.parentName].trim()
+    : (idx.name !== undefined ? (cols[idx.name] || '').trim() : '');
+  if (pName) e.names.set(pName, (e.names.get(pName) || 0) + 1);
+  e.children.add(uei);
+  e.fy.set(fy, (e.fy.get(fy) || 0) + obl);
+  if (naics) e.naics.set(naics, (e.naics.get(naics) || 0) + obl);
+  e.cat.set(cat, (e.cat.get(cat) || 0) + obl);
+  const cfk = fy + '|' + cat;
+  const prev = e.catFy.get(cfk) || { obl: 0, n: 0 };
+  e.catFy.set(cfk, { obl: prev.obl + obl, n: prev.n + 1 });
+  if (isDod) e.dod += obl;
+  e.total += obl;
+  if (obl > e.maxAction) e.maxAction = obl;
+}
+
+function mergeEntity(a, b) {
+  b.names.forEach((v, k) => a.names.set(k, (a.names.get(k) || 0) + v));
+  b.children.forEach(c => a.children.add(c));
+  b.fy.forEach((v, k) => a.fy.set(k, (a.fy.get(k) || 0) + v));
+  b.naics.forEach((v, k) => a.naics.set(k, (a.naics.get(k) || 0) + v));
+  b.cat.forEach((v, k) => a.cat.set(k, (a.cat.get(k) || 0) + v));
+  b.catFy.forEach((v, k) => {
+    const p = a.catFy.get(k) || { obl: 0, n: 0 };
+    a.catFy.set(k, { obl: p.obl + v.obl, n: p.n + v.n });
+  });
+  a.dod += b.dod; a.total += b.total;
+  a.maxAction = Math.max(a.maxAction, b.maxAction);
+}
+
+function consolidateNames(acc) {
+  const byKey = new Map();
+  acc.entities.forEach(e => {
+    const top = [...e.names.entries()].sort((x, y) => y[1] - x[1])[0];
+    const k = nameKey(top ? top[0] : '');
+    if (k.length < 4) return;
+    (byKey.get(k) || byKey.set(k, []).get(k)).push(e.pid);
+  });
+  const log = [];
+  byKey.forEach((pids, key) => {
+    if (pids.length < 2) return;
+    pids.sort();
+    const keeper = acc.entities.get(pids[0]);
+    const names = new Set();
+    pids.forEach(p => acc.entities.get(p).names.forEach((_, n) => names.add(n)));
+    for (let i = 1; i < pids.length; i++) {
+      mergeEntity(keeper, acc.entities.get(pids[i]));
+      acc.entities.delete(pids[i]);
+    }
+    log.push({ name_stem: key, merged_uei_count: pids.length, canonical_uei: pids[0],
+               merged_ueis: pids.join('; '), names_seen: [...names].slice(0, 4).join(' | '),
+               review: 'CONFIRM these are the same commercial entity' });
+  });
+  return log;
+}
+
+const UNRESTRICTED = new Set(['FULL_AND_OPEN', 'UNRESTRICTED_OTHER_THAN_F&O']);
+
+function finalize(acc, cfg) {
+  if (cfg.consolidate) acc.mergeLog = consolidateNames(acc); else acc.mergeLog = [];
+  const win = cfg.fyWindow;
+  const lower = cfg.lower, hi = cfg.hi, bpct = cfg.boundaryPct;
+  const defaultLo = Object.keys(lower).length ? Math.min(...Object.values(lower)) : 0;
+
+  const cohort = [], tableB = [];
+  acc.entities.forEach(e => {
+    let winTotal = 0; const fyVals = [];
+    win.forEach(y => { const v = e.fy.get(y) || 0; fyVals.push(v); winTotal += v; });
+    const avg = winTotal / win.length;
+
+    const top = [...e.names.entries()].sort((x, y) => y[1] - x[1])[0];
+    const name = top ? top[0] : e.pid;
+    const domNaics = [...e.naics.entries()].sort((x, y) => y[1] - x[1])[0];
+    const dn = domNaics ? domNaics[0] : '';
+    const entityLo = lower[dn] !== undefined ? lower[dn] : defaultLo;
+
+    const flag = avg < entityLo ? 'BELOW' : (avg > hi ? 'ABOVE' : 'IN_BAND');
+    const boundary = (Math.abs(avg - entityLo) / entityLo <= bpct) || (Math.abs(avg - hi) / hi <= bpct);
+    const conc = winTotal > 0 ? e.maxAction / winTotal : 0;
+    const dodShare = winTotal !== 0 ? e.dod / e.total : 0;
+    const mean = fyVals.reduce((a, b) => a + b, 0) / fyVals.length;
+    const sd = Math.sqrt(fyVals.reduce((a, b) => a + (b - mean) ** 2, 0) / fyVals.length);
+    const cv = mean > 0 ? sd / mean : 0;
+
+    let conf;
+    if (e.children.size >= 5 || conc > 0.35 || (dodShare > 0.5 && cfg.lagMode === 'none')) conf = 'LOW';
+    else if (e.children.size === 1 && cv < 0.5 && conc < 0.15) conf = 'HIGH';
+    else conf = 'MEDIUM';
+
+    let unres = 0;
+    e.cat.forEach((v, k) => { if (UNRESTRICTED.has(k)) unres += v; });
+    const unresShare = e.total !== 0 ? Math.max(0, Math.min(1, unres / e.total)) : 0;
+
+    const rec = { parent_uei: e.pid, parent_name: name, child_uei_count: e.children.size };
+    win.forEach((y, i) => { rec['fy' + y + '_obl'] = round2(fyVals[i]); });
+    Object.assign(rec, {
+      fy_total_obl: round2(winTotal), fy_avg_obl: round2(avg),
+      dominant_naics: dn, current_standard_applied: entityLo,
+      dod_share_pct: round1(dodShare * 100),
+      max_action_concentration_pct: round1(conc * 100),
+      fy_volatility_cv: Math.round(cv * 1000) / 1000,
+      cohort_flag: flag, boundary_flag: boundary, protege_eligible_flag: flag === 'IN_BAND',
+      unrestricted_share_pct: round1(unresShare * 100),
+      sam_size_rep: '(pending SAM enrichment)',
+      socioeconomic_certs: '(pending SAM enrichment)',
+      proxy_confidence: conf
+    });
+    cohort.push(rec);
+
+    if (flag === 'IN_BAND') {
+      e.catFy.forEach((v, k) => {
+        const [fy, cat] = k.split('|');
+        if (!win.includes(Number(fy))) return;
+        tableB.push({ parent_uei: e.pid, fy: 'FY' + fy, competition_category: cat,
+                      obligations: round2(v.obl), action_count: v.n,
+                      pct_of_entity_total: e.total !== 0 ? round1(v.obl / e.total * 100) : 0 });
+      });
+    }
+  });
+
+  cohort.sort((a, b) => b.fy_avg_obl - a.fy_avg_obl);
+  tableB.sort((a, b) => a.parent_uei.localeCompare(b.parent_uei) || a.fy.localeCompare(b.fy));
+  return { cohort, tableB };
+}
+
+const round2 = v => Math.round(v * 100) / 100;
+const round1 = v => Math.round(v * 10) / 10;
+
+function buildLedger(acc, cfg) {
+  const rows = [];
+  acc.fySeg.forEach((v, k) => {
+    const [fy, seg] = k.split('|');
+    rows.push({ fiscal_period: 'FY' + fy, agency_segment: seg,
+      raw_obligations: round2(v.obl), action_count: v.n,
+      completeness_ratio: 1, adjusted_obligations: round2(v.obl),
+      method: cfg.lagMode === 'lagsafe' ? 'LAG_SAFE_TRUNCATION' : 'NONE',
+      lag_safe_cutoff: cfg.lagMode === 'lagsafe' ? cfg.cutoffISO : '',
+      snapshot_date: cfg.snapshotISO });
+  });
+  rows.sort((a, b) => a.fiscal_period.localeCompare(b.fiscal_period)
+    || a.agency_segment.localeCompare(b.agency_segment));
+  return rows;
+}
+
+function buildDiagnostics(acc) {
+  const out = [];
+  acc.setAsideSeen.forEach((v, code) => {
+    const c = code === '(blank)' ? '' : code;
+    const m = TAX.setAside[c];
+    out.push({ field: 'type_of_set_aside_code', code, obligations: round2(v.obl),
+      action_count: v.n, mapped_to: m || 'OTHER',
+      status: m !== undefined ? 'mapped' : 'UNMAPPED - REVIEW' });
+  });
+  acc.extentSeen.forEach((v, code) => {
+    const c = code === '(blank)' ? '' : code;
+    const m = TAX.extent[c];
+    out.push({ field: 'extent_competed_code', code, obligations: round2(v.obl),
+      action_count: v.n,
+      mapped_to: m === undefined ? 'OTHER' : (m ? 'FULL_AND_OPEN' : 'OTHER_THAN_F&O'),
+      status: m !== undefined ? 'mapped' : (c === '' ? 'mapped' : 'UNMAPPED - REVIEW') });
+  });
+  return out.sort((a, b) => a.field.localeCompare(b.field) || b.obligations - a.obligations);
+}
+
+function buildValidation(acc, cfg, cohort) {
+  const inBand = cohort.filter(c => c.cohort_flag === 'IN_BAND').length;
+  const rows = [
+    ['Snapshot date', cfg.snapshotISO],
+    ['Lag mode', cfg.lagMode],
+    ['Lag-safe cutoff', cfg.lagMode === 'lagsafe' ? cfg.cutoffISO : 'n/a'],
+    ['NAICS scope', cfg.scope && cfg.scope.length ? cfg.scope.join(', ') : 'all codes in file'],
+    ['Current standard(s) applied',
+      Object.entries(cfg.lower).map(([k, v]) => k + '=$' + (v / 1e6).toFixed(1) + 'M').join('; ')
+      + '  -- CONFIRM against 13 CFR 121.201'],
+    ['Proposed standard applied', '$' + (cfg.hi / 1e6).toFixed(1) + 'M'],
+    ['Fiscal years in window', cfg.fyWindow.map(y => 'FY' + y).join(', ')],
+    ['Rows read', acc.rows.toLocaleString()],
+    ['Rows analyzed after filters', acc.kept.toLocaleString()],
+    ['Rows dropped (no UEI or no date)', acc.dropped.toLocaleString()],
+    ['Parent UEI coverage', acc.kept ? (acc.withParent / acc.kept * 100).toFixed(1) + '% of rows' : 'n/a'],
+    ['Distinct parent entities', cohort.length.toLocaleString()],
+    ['Name consolidation', cfg.consolidate ? (acc.mergeLog.length + ' merge group(s)') : 'off'],
+    ['Entities IN_BAND', inBand.toLocaleString()],
+    ['Entities ABOVE band', cohort.filter(c => c.cohort_flag === 'ABOVE').length.toLocaleString()],
+    ['Entities at a band boundary (+/-15%)', cohort.filter(c => c.boundary_flag).length.toLocaleString()],
+    ['Proxy confidence HIGH', cohort.filter(c => c.proxy_confidence === 'HIGH').length.toLocaleString()],
+    ['Proxy confidence MEDIUM', cohort.filter(c => c.proxy_confidence === 'MEDIUM').length.toLocaleString()],
+    ['Proxy confidence LOW', cohort.filter(c => c.proxy_confidence === 'LOW').length.toLocaleString()]
+  ];
+  const bench = cfg.scope && cfg.scope.length === 1 ? TAX.benchmarks[cfg.scope[0]] : null;
+  if (bench) {
+    rows.push(['SBA ceiling for ' + cfg.scope[0], bench.toLocaleString() + ' firms small under proposed standard']);
+    rows.push(['Cohort as share of ceiling', (inBand / bench * 100).toFixed(1) + '%']);
+    rows.push(['Validation gate', inBand > bench
+      ? "FAIL - cohort exceeds SBA's count. The cohort must be a subset. Check entity resolution."
+      : (inBand === 0 ? 'FAIL - empty cohort. Check thresholds and the FY window.'
+        : 'PASS (ceiling test) - cohort is a subset, as expected. Detects over-counting only.')]);
+  }
+  rows.push(['Reminder', 'Federal obligations are not SBA receipts (13 CFR 121.104). This is a '
+    + 'candidate list with error bars, not a size determination.']);
+  return rows.map(r => ({ Check: r[0], Result: r[1] }));
+}
+
+function resolveConfig(o) {
+  const snapshot = o.snapshot ? new Date(o.snapshot + 'T00:00:00Z') : new Date();
+  const lagDays = o.lagDays === undefined ? 90 : o.lagDays;
+  const cutoff = new Date(snapshot.getTime() - lagDays * 86400000);
+  const effective = o.lagMode === 'lagsafe' ? cutoff : snapshot;
+  const endFY = lastCompleteFY(effective);
+  const n = o.fyCount || 5;
+  const fyWindow = []; for (let i = n - 1; i >= 0; i--) fyWindow.push(endFY - i);
+
+  const scope = o.scope && o.scope.length ? o.scope : null;
+  const lower = {};
+  (scope || Object.keys(TAX.currentStandards)).forEach(c => {
+    if (o.currentStandard) lower[c] = o.currentStandard;
+    else if (TAX.currentStandards[c] !== undefined) lower[c] = TAX.currentStandards[c];
+  });
+  const missing = (scope || []).filter(c => lower[c] === undefined);
+
+  let hi = o.proposedStandard || null;
+  if (!hi && scope) {
+    const groups = new Set(scope.map(c => c.slice(0, 4)));
+    if (groups.size === 1) hi = TAX.proposedByGroup[[...groups][0]] || null;
+  }
+  return { snapshot, cutoff, snapshotISO: snapshot.toISOString().slice(0, 10),
+           cutoffISO: cutoff.toISOString().slice(0, 10), cutoffMs: cutoff.getTime(),
+           fyWindow, scope, lower, hi, missing, lagMode: o.lagMode || 'lagsafe',
+           consolidate: !!o.consolidate, boundaryPct: 0.15 };
+}
+
+root.SSEngine = { TAX, ALIASES, splitCSV, resolveColumns, fiscalYear, lastCompleteFY, nameKey,
+  makeAccumulator, addRow, finalize, buildLedger, buildDiagnostics, buildValidation,
+  resolveConfig, consolidateNames };
+
+})(typeof module !== 'undefined' && module.exports ? module.exports : (this.window = this.window || this));
+</script>
+<script>(function () {
+'use strict';
+const E = window.SSEngine;
+const D = window.DocX;
+const $ = s => document.querySelector(s);
+
+/* Notice carried into every downloaded artifact, so it survives being emailed on. */
+const LOGO_URI = 'data:image/png;base64,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';
+const COPYRIGHT = '(c) 2026 The Wolverine Group, Inc. All rights reserved.';
+const GRANT = 'Provided free of charge for use in analyzing and commenting on SBA Docket '
+  + 'SBA-2026-0199. Comments close 21 September 2026.';
+const SHORT_DISC = 'ESTIMATE, NOT A DETERMINATION. This file was produced from federal prime '
+  + 'contract obligations only. SBA size standards are based on total company receipts from all '
+  + 'sources over five fiscal years, including affiliates (13 CFR 121.104). Commercial revenue, '
+  + 'subcontract revenue, and affiliate revenue are not present in this data, so a company may '
+  + 'appear below a threshold here and be well above it in fact.';
+const SHORT_DISC2 = 'Nothing here is a size determination, a size certification, or legal, '
+  + 'financial, or tax advice. Size determinations rest with the U.S. Small Business '
+  + 'Administration and the contracting officer. Proposed rules confer no rights and may change '
+  + 'or be withdrawn; do not alter a SAM representation, certification, or bid strategy on the '
+  + 'basis of this output. Confirm every threshold against the 13 CFR 121.201 table. The '
+  + 'Wolverine Group, Inc. disclaims, to the fullest extent permitted by law, any liability for '
+  + 'decisions made in reliance on this output.';
+
+const state = { file: null, entryName: '', naics: new Map(), header: null, idx: null,
+                result: null, cfg: null, custom: {} };
+
+/* ---------- navigation ---------- */
+function go(n) {
+  document.querySelectorAll('.pane').forEach((p, i) => p.classList.toggle('on', i === n));
+  document.querySelectorAll('#steps li').forEach((li, i) => {
+    li.classList.toggle('on', i === n);
+    li.classList.toggle('done', i < n);
+  });
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('[data-go]').forEach(b =>
+  b.addEventListener('click', () => go(+b.dataset.go)));
+
+/* ---------- file intake ---------- */
+const drop = $('#drop'), fileInput = $('#file');
+drop.addEventListener('click', () => fileInput.click());
+drop.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') fileInput.click(); });
+['dragenter', 'dragover'].forEach(t => drop.addEventListener(t, e => {
+  e.preventDefault(); drop.classList.add('hot'); }));
+['dragleave', 'drop'].forEach(t => drop.addEventListener(t, e => {
+  e.preventDefault(); drop.classList.remove('hot'); }));
+drop.addEventListener('drop', e => { if (e.dataTransfer.files[0]) accept(e.dataTransfer.files[0]); });
+fileInput.addEventListener('change', e => { if (e.target.files[0]) accept(e.target.files[0]); });
+
+const status = html => { $('#loadStatus').innerHTML = html; };
+const mb = n => (n / 1048576).toFixed(1) + ' MB';
+
+async function accept(f) {
+  state.file = f; state.entryName = '';
+  status('<div class="card">Reading <b>' + f.name + '</b> (' + mb(f.size) + ')…</div>');
+  try {
+    if (/\.zip$/i.test(f.name)) {
+      const zip = await JSZip.loadAsync(f);
+      const names = Object.keys(zip.files).filter(n => /\.csv$/i.test(n) && !zip.files[n].dir);
+      const pick = names.find(n => /PrimeTransactions/i.test(n) && /Contract/i.test(n))
+                || names.find(n => /PrimeTransactions/i.test(n));
+      if (!pick) {
+        status('<div class="note warn"><b>No transactions file in that ZIP.</b> It contains: '
+          + (names.join(', ') || 'no CSV files')
+          + '. You need the Prime Award Transactions file for contracts.</div>');
+        return;
+      }
+      state.zip = zip; state.entryName = pick;
+      if (/PrimeAwardSummaries/i.test(pick)) {
+        status('<div class="note warn"><b>That looks like a summaries file.</b> Re-download '
+          + 'using Prime Award Transactions.</div>');
+        return;
+      }
+    }
+    await scanHeader();
+  } catch (err) {
+    status('<div class="note warn"><b>That file could not be read.</b> ' + err.message + '</div>');
+  }
+}
+
+/* Stream the CSV, line by line, without holding it all in memory. */
+async function streamLines(onLine, onProgress) {
+  const dec = new TextDecoder('utf-8');
+  let buf = '';
+  const handle = chunk => {
+    buf += chunk;
+    let i, from = 0;
+    while ((i = buf.indexOf('\n', from)) !== -1) {
+      const line = buf.slice(from, i).replace(/\r$/, '');
+      from = i + 1;
+      if (line && onLine(line) === false) return false;
+    }
+    buf = buf.slice(from);
+    return true;
+  };
+  if (state.entryName) {
+    await new Promise((res, rej) => {
+      let seen = 0;
+      state.zip.file(state.entryName).internalStream('string')
+        .on('data', (d, meta) => { seen = meta.percent; handle(d);
+          if (onProgress) onProgress(meta.percent / 100); })
+        .on('error', rej).on('end', res).resume();
+    });
+  } else {
+    const size = state.file.size, CH = 8 * 1024 * 1024;
+    for (let off = 0; off < size; off += CH) {
+      const slice = state.file.slice(off, Math.min(off + CH, size));
+      const text = dec.decode(await slice.arrayBuffer(), { stream: true });
+      if (handle(text) === false) return;
+      if (onProgress) onProgress(Math.min(1, (off + CH) / size));
+      await new Promise(r => setTimeout(r, 0));
+    }
+  }
+  if (buf.trim()) onLine(buf.trim());
+}
+
+async function scanHeader() {
+  state.naics = new Map(); state.header = null; state.idx = null;
+  let rows = 0, minD = null, maxD = null;
+  await streamLines(line => {
+    const cols = E.splitCSV(line);
+    if (!state.header) {
+      const r = E.resolveColumns(cols);
+      if (r.hard.length) {
+        status('<div class="note warn"><b>This file is missing required columns: </b>'
+          + r.hard.join(', ') + '. Make sure you downloaded Prime Award Transactions.</div>');
+        state.header = 'bad'; return false;
+      }
+      state.header = cols; state.idx = r.idx; return;
+    }
+    rows++;
+    if (state.idx.naics !== undefined) {
+      const n = (cols[state.idx.naics] || '').trim();
+      if (n) state.naics.set(n, (state.naics.get(n) || 0) + 1);
+    }
+    const d = (cols[state.idx.date] || '').trim();
+    if (d) { if (!minD || d < minD) minD = d; if (!maxD || d > maxD) maxD = d; }
+  }, p => status('<div class="card">Reading… ' + Math.round(p * 100) + '%</div>'));
+
+  if (state.header === 'bad') return;
+  state.range = [minD, maxD];
+  status('<div class="card"><b>' + rows.toLocaleString() + '</b> contract actions · '
+    + state.naics.size + ' NAICS code' + (state.naics.size === 1 ? '' : 's')
+    + ' · ' + (minD || '?') + ' to ' + (maxD || '?')
+    + '<div class="row" style="margin-top:14px"><button class="gold" id="toScope">Continue</button>'
+    + '</div></div>');
+  $('#toScope').addEventListener('click', buildScopePane);
+  checkWindow(minD, maxD);
+}
+
+function checkWindow(minD, maxD) {
+  if (!minD || !maxD) return;
+  const s = new Date(minD + 'T00:00:00Z'), e = new Date(maxD + 'T00:00:00Z');
+  const years = (E.fiscalYear(e) - E.fiscalYear(s)) + 1;
+  if (years < 5) {
+    $('#loadStatus').insertAdjacentHTML('beforeend',
+      '<div class="note warn"><b>Your data covers about ' + years + ' fiscal year'
+      + (years === 1 ? '' : 's') + ', not five.</b> Size standards use a five-year average. '
+      + 'You can continue, but the missing years count as zero and will understate every '
+      + 'company. Re-download with a wider date range for a result you can publish.</div>');
+  }
+}
+
+/* ---------- scope pane ---------- */
+function buildScopePane() {
+  const codes = [...state.naics.keys()].sort();
+  $('#naicsList').innerHTML = codes.map(c =>
+    '<label class="chk" style="margin-bottom:6px"><input type="checkbox" class="nx" value="' + c
+    + '" checked><span>' + c + ' <span class="hint" style="display:inline">— '
+    + state.naics.get(c).toLocaleString() + ' actions</span></span></label>').join('')
+    + '<div class="hint">Uncheck any code you do not want included.</div>';
+  document.querySelectorAll('.nx').forEach(x => x.addEventListener('change', renderStandards));
+  $('#snap').value = new Date().toISOString().slice(0, 10);
+  renderStandards();
+  go(1);
+}
+
+const picked = () => [...document.querySelectorAll('.nx:checked')].map(x => x.value);
+
+function renderStandards() {
+  const sel = picked();
+  const known = E.TAX.currentStandards, prop = E.TAX.proposedByGroup;
+  let html = '', missing = [];
+  sel.forEach(c => {
+    const v = state.custom[c] !== undefined ? state.custom[c] : known[c];
+    if (v === undefined) missing.push(c);
+    else html += '<div style="display:flex;justify-content:space-between;padding:6px 0;'
+      + 'border-bottom:1px solid #EDF0F4"><span>' + c + '</span><b>$'
+      + (v / 1e6).toFixed(1) + 'M</b></div>';
+  });
+  const groups = new Set(sel.map(c => c.slice(0, 4)));
+  let hi = state.customHi || (groups.size === 1 ? prop[[...groups][0]] : undefined);
+
+  let out = '<p style="margin-top:0">Current standard for each code:</p>' + (html || '');
+  if (missing.length) {
+    out += '<div class="note warn"><b>No size standard on file for ' + missing.join(', ')
+      + '.</b> The tool will not guess one — a wrong threshold produces a plausible-looking '
+      + 'list of the wrong companies. Look the current standard up in the 13 CFR 121.201 table '
+      + 'at ecfr.gov and enter it below, with the source you took it from.</div>'
+      + missing.map(c => '<div class="grid" style="margin-bottom:10px">'
+        + '<div><label>Current standard for ' + c + '</label>'
+        + '<input type="number" class="mc" data-c="' + c + '" placeholder="19000000"></div>'
+        + '<div><label>Where you read it</label>'
+        + '<input type="text" class="ms" data-c="' + c + '" placeholder="13 CFR 121.201, read today">'
+        + '</div></div>').join('');
+  }
+  out += '<div class="grid" style="margin-top:14px"><div><label>Proposed standard</label>'
+    + '<input type="number" id="hi" value="' + (hi || '') + '" placeholder="295000000">'
+    + '<div class="hint">The figure under the rule you are analyzing.</div></div></div>';
+  out += '<div class="note"><b>Confirm both figures against 13 CFR 121.201 before you publish '
+    + 'anything.</b> Standards differ between codes that look closely related — within the '
+    + 'management consulting group alone they range from $19.0M to $29.0M.</div>';
+  $('#stdBox').innerHTML = out;
+  document.querySelectorAll('.mc').forEach(i => i.addEventListener('change', e => {
+    const src = document.querySelector('.ms[data-c="' + e.target.dataset.c + '"]');
+    if (!src || !src.value.trim()) { alert('Enter where you read that figure. A standard '
+      + 'without a source is not usable.'); e.target.value = ''; return; }
+    state.custom[e.target.dataset.c] = parseFloat(e.target.value);
+    renderStandards();
+  }));
+}
+
+$('#toRun').addEventListener('click', () => {
+  const sel = picked();
+  if (!sel.length) { alert('Select at least one NAICS code.'); return; }
+  const hi = parseFloat($('#hi').value);
+  const lower = {}; let missing = [];
+  sel.forEach(c => {
+    const v = state.custom[c] !== undefined ? state.custom[c] : E.TAX.currentStandards[c];
+    if (v === undefined) missing.push(c); else lower[c] = v;
+  });
+  if (missing.length) { alert('Enter a current size standard for: ' + missing.join(', ')); return; }
+  if (!hi) { alert('Enter the proposed size standard.'); return; }
+  state.cfg = E.resolveConfig({ snapshot: $('#snap').value, scope: sel,
+    lagMode: $('#lag').value, consolidate: $('#cons').checked, fyCount: +$('#fyc').value,
+    proposedStandard: hi });
+  state.cfg.lower = lower; state.cfg.hi = hi;
+  $('#runSummary').textContent = sel.length + ' NAICS code' + (sel.length === 1 ? '' : 's')
+    + ' · ' + state.cfg.fyWindow.map(y => 'FY' + y).join(', ') + ' · proposed threshold $'
+    + (hi / 1e6).toFixed(1) + 'M' + (state.cfg.consolidate ? ' · names combined' : '');
+  go(2);
+});
+
+/* ---------- run ---------- */
+$('#run').addEventListener('click', async () => {
+  const btn = $('#run'); btn.disabled = true;
+  const log = m => { $('#log').innerHTML += m + '<br>'; };
+  $('#log').innerHTML = ''; $('#bar').style.width = '0';
+  const cfg = state.cfg;
+  const acc = E.makeAccumulator({ scope: cfg.scope, cutoff: cfg.lagMode === 'lagsafe' ? cfg.cutoffMs : null });
+  let first = true;
+  log('Reading transactions…');
+  await streamLines(line => {
+    const cols = E.splitCSV(line);
+    if (first) { first = false; return; }
+    E.addRow(acc, cols, state.idx);
+  }, p => { $('#bar').style.width = (p * 100) + '%'; });
+  $('#bar').style.width = '100%';
+  log(acc.rows.toLocaleString() + ' actions read, ' + acc.kept.toLocaleString() + ' in scope.');
+
+  const { cohort, tableB } = E.finalize(acc, cfg);
+  if (cfg.consolidate) log(acc.mergeLog.length + ' name merge group(s) — review them in the workbook.');
+  const res = { cohort, tableB, ledger: E.buildLedger(acc, cfg),
+    diagnostics: E.buildDiagnostics(acc), validation: E.buildValidation(acc, cfg, cohort),
+    merges: acc.mergeLog };
+  state.result = res;
+  log('Done.');
+  renderResults();
+  go(3);
+});
+
+/* ---------- results ---------- */
+const money = v => v >= 1e9 ? '$' + (v / 1e9).toFixed(2) + 'B'
+  : v >= 1e6 ? '$' + (v / 1e6).toFixed(1) + 'M' : '$' + Math.round(v).toLocaleString();
+
+function renderResults() {
+  const r = state.result, cfg = state.cfg;
+  const inb = r.cohort.filter(c => c.cohort_flag === 'IN_BAND');
+  const above = r.cohort.filter(c => c.cohort_flag === 'ABOVE').length;
+  const total = inb.reduce((s, c) => s + c.fy_total_obl, 0);
+  const shares = inb.map(c => c.unrestricted_share_pct).sort((a, b) => a - b);
+  const med = shares.length ? shares[Math.floor(shares.length / 2)] : 0;
+
+  $('#resSub').textContent = cfg.scope.join(', ') + ' · '
+    + cfg.fyWindow.map(y => 'FY' + y).join('–').replace(/–(?!.*–)/, '–')
+    + ' · analysis date ' + cfg.snapshotISO;
+  $('#stats').innerHTML = [
+    [inb.length, 'companies in the band'],
+    [above, 'already above the threshold'],
+    [money(total), 'obligations in the cohort'],
+    [med + '%', 'median unrestricted share']
+  ].map(s => '<div><span>' + s[0] + '</span><small>' + s[1] + '</small></div>').join('');
+
+  const gateRow = r.validation.find(v => v.Check === 'Validation gate');
+  let g = '';
+  if (gateRow) g += '<div class="note' + (/^FAIL/.test(gateRow.Result) ? ' warn' : '')
+    + '"><b>Sanity check.</b> ' + gateRow.Result + '</div>';
+  const unmapped = r.diagnostics.filter(d => /UNMAPPED/.test(d.status));
+  if (unmapped.length) g += '<div class="note warn"><b>' + unmapped.length
+    + ' code(s) in your file were not recognized</b> and were set aside rather than misfiled ('
+    + money(Math.abs(unmapped.reduce((s, d) => s + d.obligations, 0)))
+    + ' of obligations). See the Diagnostics tab before relying on the competition split.</div>';
+  if (cfg.consolidate && r.merges.length) g += '<div class="note"><b>' + r.merges.length
+    + ' groups of companies were combined</b> because they share a name. Name matching is a '
+    + 'heuristic — check the Entity_Merges tab, especially short names.</div>';
+  $('#gate').innerHTML = g;
+
+  const cols = ['parent_name', 'fy_avg_obl', 'unrestricted_share_pct', 'dod_share_pct',
+    'child_uei_count', 'proxy_confidence'];
+  const heads = ['Company', 'Avg obligations', 'Unrestricted', 'Defense', 'IDs', 'Confidence'];
+  $('#tbl').innerHTML = '<thead><tr>' + heads.map((h, i) =>
+    '<th' + (i > 0 && i < 5 ? ' style="text-align:right"' : '') + '>' + h + '</th>').join('')
+    + '</tr></thead><tbody>' + inb.map(c => '<tr>'
+      + '<td>' + esc(c.parent_name) + '</td>'
+      + '<td class="num">' + money(c.fy_avg_obl) + '</td>'
+      + '<td class="num">' + c.unrestricted_share_pct + '%</td>'
+      + '<td class="num">' + c.dod_share_pct + '%</td>'
+      + '<td class="num">' + c.child_uei_count + '</td>'
+      + '<td><span class="pill ' + c.proxy_confidence + '">' + c.proxy_confidence + '</span></td>'
+      + '</tr>').join('') + '</tbody>';
+}
+const esc = s => String(s).replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
+
+/* ---------- downloads ---------- */
+const embedded = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
+
+/* Downloads are blocked inside sandboxed frames. Try, then offer a way through. */
+function save(blob, name, textFallback) {
+  const url = URL.createObjectURL(blob);
+  let worked = true;
+  try {
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  } catch (e) { worked = false; }
+  setTimeout(() => URL.revokeObjectURL(url), 120000);
+  if (embedded) showFallback(name, url, textFallback);
+  return worked;
+}
+
+function showFallback(name, url, text) {
+  let box = document.getElementById('fallback');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'fallback'; box.className = 'note warn';
+    document.querySelector('.dl').insertAdjacentElement('afterend', box);
+  }
+  box.innerHTML = '<b>If nothing downloaded, this page is running inside a frame.</b> '
+    + 'Frames block file downloads — it is a browser rule, not a problem with your data. '
+    + 'Your results are ready; here are three ways to get them out.'
+    + '<div style="margin-top:10px"><a href="' + url + '" download="' + name
+    + '" style="color:#0D1B3E"><b>1. Right-click this link and choose Save link as</b></a> — '
+    + name + '</div>'
+    + '<div style="margin-top:8px"><b>2. Open the tool in its own tab</b> and run it again. '
+    + '<button class="ghost" style="padding:4px 10px;font-size:12.5px" id="popout">'
+    + 'Open in a new tab</button> Downloads work normally outside a frame.</div>'
+    + (text ? '<div style="margin-top:8px"><b>3. Copy the data to your clipboard</b> and paste '
+      + 'it into a spreadsheet. <button class="ghost" style="padding:4px 10px;font-size:12.5px" '
+      + 'id="copyout">Copy to clipboard</button> <span id="copymsg"></span></div>' : '');
+  const pop = document.getElementById('popout');
+  if (pop) pop.onclick = () => { try { window.open(location.href, '_blank'); }
+    catch (e) { alert('Your browser blocked that. Copy the page address and open it directly.'); } };
+  const cp = document.getElementById('copyout');
+  if (cp) cp.onclick = async () => {
+    try { await navigator.clipboard.writeText(text);
+      document.getElementById('copymsg').textContent = 'Copied.'; }
+    catch (e) { document.getElementById('copymsg').textContent =
+      'Clipboard blocked here — use option 1 or 2.'; }
+  };
+}
+const stamp = () => state.cfg.snapshotISO.replace(/-/g, '');
+
+$('#dlXlsx').addEventListener('click', () => {
+  const r = state.result, wb = XLSX.utils.book_new();
+  const add = (rows, name) => XLSX.utils.book_append_sheet(wb,
+    XLSX.utils.json_to_sheet(rows.length ? rows : [{ '': 'no rows' }]), name);
+  const cfg = state.cfg;
+  add([
+    { Item: 'Tool', Detail: 'NAICS Size Standard Impact Tool' },
+    { Item: 'Copyright', Detail: COPYRIGHT },
+    { Item: 'Terms', Detail: GRANT },
+    { Item: 'Produced', Detail: new Date().toISOString().slice(0, 10) },
+    { Item: 'Analysis date', Detail: cfg.snapshotISO },
+    { Item: 'NAICS scope', Detail: cfg.scope.join(', ') },
+    { Item: 'Fiscal years averaged', Detail: cfg.fyWindow.map(y => 'FY' + y).join(', ') },
+    { Item: 'Current standard(s)', Detail: Object.entries(cfg.lower)
+        .map(([k, v]) => k + '=' + money(v)).join('; ') + ' (confirm against 13 CFR 121.201)' },
+    { Item: 'Proposed standard', Detail: money(cfg.hi) },
+    { Item: 'Names combined', Detail: cfg.consolidate ? 'yes' : 'no' },
+    { Item: 'READ THIS', Detail: SHORT_DISC },
+    { Item: 'READ THIS', Detail: SHORT_DISC2 }
+  ], 'Start_Here');
+  add(r.validation, 'Validation');
+  add(r.cohort, 'Table_A_Cohort');
+  add(r.tableB, 'Table_B_Competition');
+  add(r.ledger, 'Table_C_Lag_Ledger');
+  add(r.diagnostics, 'Diagnostics');
+  if (r.merges.length) add(r.merges, 'Entity_Merges');
+  save(new Blob([XLSX.write(wb, { bookType: 'xlsx', type: 'array' })],
+    { type: 'application/octet-stream' }), 'size_standard_impact_' + stamp() + '.xlsx');
+});
+
+$('#dlCsv').addEventListener('click', () => {
+  const inb = state.result.cohort.filter(c => c.cohort_flag === 'IN_BAND');
+  const head = ['# NAICS Size Standard Impact Tool', '# ' + COPYRIGHT, '# ' + GRANT,
+    '# Analysis date: ' + state.cfg.snapshotISO + '  |  NAICS: ' + state.cfg.scope.join(' ')
+      + '  |  Window: ' + state.cfg.fyWindow.map(y => 'FY' + y).join(' '),
+    '# ' + SHORT_DISC, '# ' + SHORT_DISC2, '#'].join('\n') + '\n';
+  const csv = head + XLSX.utils.sheet_to_csv(XLSX.utils.json_to_sheet(inb));
+  save(new Blob([csv], { type: 'text/csv' }), 'cohort_' + stamp() + '.csv', csv);
+});
+
+$('#dlPdf').addEventListener('click', () => {
+  const r = state.result, cfg = state.cfg;
+  const inb = r.cohort.filter(c => c.cohort_flag === 'IN_BAND');
+  const NAVY = '0D1B3D', GOLD = 'C7950B';
+  const H = (n, t) => D.para({ runs: [
+      { t: 'PART ' + n, b: true, color: NAVY, sz: 24, spacing: 14 },
+      { t: '   \u2022   ', b: true, color: GOLD, sz: 24 },
+      { t: t, b: true, color: NAVY, sz: 24, spacing: 14 }],
+    before: 300, after: 130, keepNext: true });
+  const CHK = t => D.para({ runs: [
+      { t: '\u2610   ', b: true, color: NAVY, sz: 24 }, { t: t, sz: 21 }],
+    indent: 260, hanging: 260, after: 110 });
+  const line = (label, w) => D.para({ runs: [
+      { t: label + '  ', b: true, color: NAVY, sz: 21 },
+      { t: '\u00A0'.repeat(w || 46), sz: 21 }], after: 130 });
+
+  const figs = [
+    ['Companies in the band', String(inb.length)],
+    ['Companies above the threshold', String(r.cohort.filter(c => c.cohort_flag === 'ABOVE').length)],
+    ['Companies at a band boundary', String(inb.filter(c => c.boundary_flag).length)],
+    ['Cohort obligations over the window', money(inb.reduce((s, c) => s + c.fy_total_obl, 0))],
+    ['Companies at or above 95% unrestricted', String(inb.filter(c => c.unrestricted_share_pct >= 95).length)],
+    ['Distinct companies in the population', String(r.cohort.length)]
+  ];
+
+  const body = [
+    D.para({ runs: [{ t: 'THE WOLVERINE GROUP', b: true, color: NAVY, sz: 19, spacing: 30 }], after: 20 }),
+    D.para({ runs: [{ t: 'Federal Acquisition Analytics', color: GOLD, sz: 19, spacing: 18 }], after: 260 }),
+    D.para({ runs: [{ t: 'Figure Verification Checklist', b: true, color: NAVY, sz: 40 }], after: 50 }),
+    D.para({ runs: [{ t: 'NAICS Size Standard Impact Tool', b: true, color: NAVY, sz: 24 }],
+      after: 220, ruleBelow: true, ruleColor: GOLD }),
+    D.para({ runs: [{ t: 'Complete this before any figure from this run is published, briefed, '
+      + 'or filed. Enter the value you independently read from the source document, not the '
+      + 'value printed here. Two different people must sign.', sz: 21 }], after: 60 }),
+
+    H(1, 'RUN PARAMETERS'),
+    D.table([
+      [{ t: 'Item', b: true, color: 'FFFFFF' }, { t: 'Value', b: true, color: 'FFFFFF' }],
+      ['NAICS scope', cfg.scope.join(', ')],
+      ['Fiscal years averaged', cfg.fyWindow.map(y => 'FY' + y).join(', ')],
+      ['Analysis date', cfg.snapshotISO],
+      ['Defense lag handling', cfg.lagMode],
+      ['Company identifiers combined', cfg.consolidate ? 'yes \u2014 ' + r.merges.length + ' groups' : 'no'],
+      ['Current standard(s) applied', Object.entries(cfg.lower)
+        .map(([k, v]) => k + ' = ' + money(v)).join('; ')],
+      ['Proposed standard applied', money(cfg.hi)]
+    ], [3100, 6260], { headerFill: NAVY, zebra: true }),
+
+    H(2, 'FIGURES PRODUCED BY THIS RUN'),
+    D.para({ runs: [{ t: 'Check each figure against its source, then enter what you read and '
+      + 'initial it.', sz: 20, i: true, color: '5A5A5A' }], after: 130 }),
+    D.table([[{ t: '', b: true, color: 'FFFFFF' }, { t: 'Figure', b: true, color: 'FFFFFF' },
+      { t: 'Run value', b: true, color: 'FFFFFF' }, { t: 'Verified value', b: true, color: 'FFFFFF' },
+      { t: 'Initials', b: true, color: 'FFFFFF' }]].concat(
+      figs.map(f => [{ t: '\u2610', b: true, align: 'center' }, { t: f[0] },
+        { t: f[1] }, { t: '' }, { t: '' }])),
+      [520, 3600, 1900, 2140, 1200], { headerFill: NAVY, zebra: true }),
+
+    H(3, 'BEFORE YOU PUBLISH'),
+    CHK('Every threshold was confirmed against the 13 CFR 121.201 table, not a summary.'),
+    CHK('The averaging window is stated wherever a company count appears.'),
+    CHK('The list of combined company identifiers was reviewed, including short name stems.'),
+    CHK('Confidence ratings were carried through to anything client-facing.'),
+    CHK('The analysis date was recorded; spending data backfills continuously.'),
+    CHK('No figure is presented as a size determination.'),
+
+    H(4, 'SIGN-OFF'),
+    D.para({ runs: [{ t: 'Two different people. Self-verification defeats the purpose.',
+      sz: 20, i: true, color: '5A5A5A' }], after: 150 }),
+    line('Preparer', 40), line('Date', 24),
+    line('Reviewer', 40), line('Date', 24),
+
+    D.spacer(240),
+    D.para({ runs: [{ t: SHORT_DISC, sz: 17, i: true, color: '5A5A5A' }], after: 100 }),
+    D.para({ runs: [{ t: SHORT_DISC2, sz: 17, i: true, color: '5A5A5A' }], after: 100 }),
+    D.para({ runs: [{ t: COPYRIGHT + ' ' + GRANT, sz: 17, i: true, color: '5A5A5A' }], after: 0 })
+  ].join('');
+
+  D.pack(D.build(body, { top: 1440, bottom: 1080, left: 1080, right: 1080 }))
+    .then(blob => save(blob, 'verification_checklist_' + stamp() + '.docx'))
+    .catch(err => { console.error(err); alert('The checklist could not be built: ' + err.message); });
+});
+
+/* ---------- SBA comment letter ---------- */
+
+function letterFigures() {
+  const r = state.result, cfg = state.cfg;
+  const inb = r.cohort.filter(c => c.cohort_flag === 'IN_BAND');
+  const num = id => { const v = parseFloat(($('#' + id).value || '').replace(/[$,]/g, ''));
+    return isNaN(v) ? null : v; };
+  const run = [
+    ['A1', 'Firms whose federal obligations fall between the current and proposed thresholds',
+      inb.length, 'count'],
+    ['A2', 'Firms already above the proposed threshold',
+      r.cohort.filter(c => c.cohort_flag === 'ABOVE').length, 'count'],
+    ['A3', 'Combined obligations of that cohort over the analysis window',
+      Math.round(inb.reduce((s, c) => s + c.fy_total_obl, 0)), 'usd'],
+    ['A4', 'Median share of cohort obligations won through unrestricted competition',
+      inb.length ? inb.map(c => c.unrestricted_share_pct).sort((a, b) => a - b)[Math.floor(inb.length / 2)] : 0, 'pct'],
+    ['A5', 'Cohort firms taking at least 95 percent of obligations through unrestricted competition',
+      inb.filter(c => c.unrestricted_share_pct >= 95).length, 'count'],
+    ['A6', 'Distinct firms in the analyzed population', r.cohort.length, 'count'],
+    ['A7', 'Current size standard applied', Math.min(...Object.values(cfg.lower)), 'usd'],
+    ['A8', 'Proposed size standard applied', cfg.hi, 'usd']
+  ];
+  const firm = [];
+  const rec = num('cRec'), emp = num('cEmp'), yrs = num('cYrs'), disp = num('cDisp');
+  if (rec) firm.push(['F1', 'Our five-year average annual receipts', rec, 'usd']);
+  if (emp) firm.push(['F2', 'Our employee count', emp, 'count']);
+  if (yrs) firm.push(['F3', 'Years in the federal market', yrs, 'count']);
+  if (disp) firm.push(['F4', 'Set-aside obligations we project at risk of displacement', disp, 'usd']);
+  const record = [
+    ['R1', 'Industries where SBA\u2019s own analysis supported a decrease but none is proposed', 45, 'count'],
+    ['R2', 'Net increase in firms classified as small under the proposal', 114541, 'count'],
+    ['R3', 'Firms holding FY2025 contracts that would become newly eligible', 37002, 'count'],
+    ['R4', 'FY2025 obligations held by those firms', 71000000000, 'usd'],
+    ['R5', 'Receipts-based size standards under current rules', 496, 'count'],
+    ['R6', 'Receipts-based size standards under the proposal', 129, 'count'],
+    ['R7', 'Receipts averaging period for federal contracting (13 CFR 121.104)', 5, 'count']
+  ];
+  return { run, firm, record, all: run.concat(firm, record) };
+}
+
+const fmtFig = (v, kind) => kind === 'usd' ? money(v) : (kind === 'pct' ? v + ' percent' : String(v));
+
+function buildLetterPrompt(F) {
+  const cfg = state.cfg;
+  const rows = F.all.map(f => '  ' + f[0] + '. ' + f[1] + ': ' + fmtFig(f[2], f[3])).join('\n');
+  return 'You are drafting a public comment on SBA\u2019s proposed rule, Small Business Size '
+    + 'Standards, Docket SBA-2026-0199 (RIN 3245-AI67, 91 FR 53741, August 20, 2026), and the '
+    + 'companion methodology notice, Docket SBA-2026-0265.\n\n'
+    + 'I am ' + (($('#cCo').value || '').trim() || '[COMPANY TYPE NOT SUPPLIED]')
+    + ', primary NAICS ' + (($('#cNaics').value || '').trim() || '[NAICS NOT SUPPLIED]') + '.\n\n'
+    + 'Write a 1,000-word comment structured as follows:\n'
+    + '(1) our standing and stake, in two sentences;\n'
+    + '(2) a specific objection to SBA\u2019s decision not to reduce standards in the 45 '
+    + 'industries its own analysis identified, framed as an internal inconsistency in the '
+    + 'record rather than as disagreement with the outcome;\n'
+    + '(3) our firm-level data showing projected set-aside dollar displacement, using only the '
+    + 'figures below;\n'
+    + '(4) an objection to SBA issuing the revised methodology and the standards derived from '
+    + 'it simultaneously under a single comment period, with a request to reopen the '
+    + 'methodology docket and resolve it before the derived standards are finalized;\n'
+    + '(5) a specific alternative written as regulatory text SBA could adopt in 13 CFR 121.201, '
+    + 'proposing tiered thresholds within each industry group rather than one group-wide figure.\n\n'
+    + 'FIGURE DISCIPLINE, NON-NEGOTIABLE:\n'
+    + '- Cite only the figures listed below. Introduce no number, percentage, dollar amount, '
+    + 'count, or date that is not in this list.\n'
+    + '- Do not round, restate, or derive new figures from them. If a computation is needed, '
+    + 'say so in words and mark it for the filer to compute.\n'
+    + '- Mark anything you cannot source from these inputs inline as [UNSOURCED]. Do not '
+    + 'estimate and do not silently omit it.\n'
+    + '- Where a figure derives from federal contract obligations, do not describe it as '
+    + 'receipts or as a size determination.\n\n'
+    + 'STYLE: plain professional English, no rhetorical flourishes, no advocacy adjectives, no '
+    + 'appeals to hardship unsupported by the figures. Agencies must respond to significant '
+    + 'comments; sentiment is not significant, a methodological objection backed by data is. '
+    + 'Write to that standard.\n\n'
+    + 'Output the comment body only. No letterhead, no addresses, no salutation block, no '
+    + 'signature block, no headings other than the five section numbers.\n\n'
+    + 'AUTHORIZED FIGURES\n' + rows + '\n\n'
+    + 'PROVENANCE (state this accurately if you characterize the data): figures beginning A '
+    + 'were computed from USAspending prime contract transactions for NAICS '
+    + cfg.scope.join(', ') + ' over ' + cfg.fyWindow.map(y => 'FY' + y).join(', ')
+    + '. They are federal prime contract obligations, not receipts under 13 CFR 121.104. '
+    + 'Figures beginning F were supplied by the filer. Figures beginning R are from the '
+    + 'published record of the proposed rule.';
+}
+
+/* Flag any number in the draft that does not trace to the authorized figures. */
+function scanLetter(text, F) {
+  const ok = F.all.map(f => Number(f[2]));
+  const allow = [45, 95, 15, 5, 121, 125, 201, 104, 8, 2026, 2025, 2024, 2023, 2022, 2021,
+    3245, 199, 265, 53741, 91, 13, 1000, 1, 2, 3, 4, 5, 20, 21]
+    .concat((state.cfg.scope || []).map(Number))
+    .concat([Number(($('#cNaics').value || '').trim())].filter(v => !isNaN(v)));
+  const near = (a, b) => a === b || (Math.max(Math.abs(a), Math.abs(b)) > 0
+    && Math.abs(a - b) / Math.max(Math.abs(a), Math.abs(b)) <= 0.005);
+  const out = [], seen = new Set();
+  const re = /\$\s?[\d,]+(?:\.\d+)?\s*(?:trillion|billion|million)?|\b[\d,]+(?:\.\d+)?\s*(?:trillion|billion|million)\b|\b[\d,]+(?:\.\d+)?\s?%|\b\d[\d,]*(?:\.\d+)?\b/gi;
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    const tok = m[0].trim();
+    let t = tok.toLowerCase().replace(/[$,%]/g, '').trim();
+    let mult = 1;
+    if (/trillion$/.test(t)) { mult = 1e12; t = t.replace(/trillion$/, ''); }
+    else if (/billion$/.test(t)) { mult = 1e9; t = t.replace(/billion$/, ''); }
+    else if (/million$/.test(t)) { mult = 1e6; t = t.replace(/million$/, ''); }
+    const v = parseFloat(t.trim()) * mult;
+    if (isNaN(v) || seen.has(tok)) continue;
+    seen.add(tok);
+    if (ok.some(o => near(v, o)) || allow.some(a => near(v, a))) continue;
+    const s2 = Math.max(0, m.index - 55);
+    out.push({ token: tok, context: text.slice(s2, m.index + tok.length + 55).replace(/\s+/g, ' ') });
+  }
+  if (/\[UNSOURCED\]/i.test(text)) out.push({ token: '[UNSOURCED] marker', context: 'left in the draft' });
+  return out;
+}
+
+function letterDocx(bodyText, F, flagged) {
+  const paras = bodyText.split(/\n{2,}/).map(t => t.trim()).filter(Boolean);
+  const body = [];
+  if (flagged.length) {
+    body.push(D.para({ runs: [{ t: 'REVIEW BEFORE FILING \u2014 delete this notice once resolved.',
+      b: true, sz: 21 }], after: 80 }));
+    body.push(D.para({ runs: [{ t: 'These figures appear in the draft but do not trace to the '
+      + 'authorized list: ' + flagged.map(f => f.token).join(', ')
+      + '. Source each one or remove it. One unsupported number causes the whole comment to be '
+      + 'discounted.', sz: 21 }], after: 260 }));
+  }
+  paras.forEach(t => {
+    const heading = /^\(?\d\)?[.)]?\s+[A-Z]/.test(t) && t.length < 90;
+    body.push(D.para({ runs: [{ t: t, b: heading, sz: 22 }], after: 200, line: 300 }));
+  });
+  body.push(D.spacer(200));
+  body.push(D.para({ runs: [{ t: 'Figures cited', b: true, sz: 22 }], after: 120 }));
+  F.all.forEach(f => body.push(D.para({ runs: [
+    { t: f[0] + '. ', b: true, sz: 20 },
+    { t: f[1] + ': ' + fmtFig(f[2], f[3]), sz: 20 }], after: 60 })));
+  body.push(D.spacer(120));
+  body.push(D.para({ runs: [{ t: 'Figures beginning A were computed from USAspending prime '
+    + 'contract transactions and are federal contract obligations, not receipts under 13 CFR '
+    + '121.104. Figures beginning F were supplied by the filer. Figures beginning R are from '
+    + 'the published record of the proposed rule. Verify each against its source before filing.',
+    sz: 19, i: true }], after: 0 }));
+  return D.pack(D.build(body.join(''), { top: 1440, bottom: 1440, left: 1440, right: 1440 }));
+}
+
+function composeInputs(F) {
+  const r = state.result, cfg = state.cfg;
+  const inb = r.cohort.filter(c => c.cohort_flag === 'IN_BAND');
+  const num = id => { const v = parseFloat(($('#' + id).value || '').replace(/[$,]/g, ''));
+    return isNaN(v) ? null : v; };
+  return {
+    position: $('#cPos').value,
+    companyType: ($('#cCo').value || '').trim(),
+    naics: ($('#cNaics').value || '').trim(),
+    years: num('cYrs'), receipts: num('cRec'), employees: num('cEmp'),
+    displacement: num('cDisp'),
+    inBand: inb.length,
+    above: r.cohort.filter(c => c.cohort_flag === 'ABOVE').length,
+    boundary: inb.filter(c => c.boundary_flag).length,
+    cohortObl: Math.round(inb.reduce((s, c) => s + c.fy_total_obl, 0)),
+    medianUnres: inb.length
+      ? inb.map(c => c.unrestricted_share_pct).sort((a, b) => a - b)[Math.floor(inb.length / 2)] : 0,
+    ge95: inb.filter(c => c.unrestricted_share_pct >= 95).length,
+    population: r.cohort.length,
+    scope: cfg.scope, fyWindow: cfg.fyWindow,
+    lower: Math.min.apply(null, Object.values(cfg.lower)), hi: cfg.hi
+  };
+}
+
+function letterText(draft) {
+  return draft.sections.map(s => s[0] + '\n\n' + s[1]).join('\n\n');
+}
+
+function letterDocx(draft, F, flagged) {
+  const body = [];
+  if (flagged.length) {
+    body.push(D.para({ runs: [{ t: 'REVIEW BEFORE FILING \u2014 delete this notice once resolved.',
+      b: true, sz: 21 }], after: 80 }));
+    body.push(D.para({ runs: [{ t: 'These figures appear in the draft but do not trace to the '
+      + 'authorized list: ' + flagged.map(f => f.token).join(', ') + '. Source each one or '
+      + 'remove it.', sz: 21 }], after: 260 }));
+  }
+  draft.sections.forEach(sec => {
+    body.push(D.para({ runs: [{ t: sec[0], b: true, sz: 22 }], before: 200, after: 120,
+      keepNext: true }));
+    sec[1].split(/\n{2,}/).forEach(t => body.push(
+      D.para({ runs: [{ t: t.trim(), sz: 22 }], after: 200, line: 300 })));
+  });
+  body.push(D.spacer(220));
+  body.push(D.para({ runs: [{ t: 'Figures cited', b: true, sz: 22 }], after: 120 }));
+  F.all.forEach(f => body.push(D.para({ runs: [
+    { t: f[0] + '. ', b: true, sz: 20 },
+    { t: f[1] + ': ' + fmtFig(f[2], f[3]), sz: 20 }], after: 60 })));
+  body.push(D.spacer(120));
+  body.push(D.para({ runs: [{ t: 'Figures beginning A were computed from USAspending prime '
+    + 'contract transactions and are federal contract obligations, not receipts under 13 CFR '
+    + '121.104. Figures beginning F were supplied by the filer. Figures beginning R are from '
+    + 'the published record of the proposed rule. Verify each against its source before filing.',
+    sz: 19, i: true }], after: 0 }));
+  return D.pack(D.build(body.join(''), { top: 1440, bottom: 1440, left: 1440, right: 1440 }));
+}
+
+$('#draftLetter').addEventListener('click', () => {
+  const out = $('#letterOut'), msg = $('#letterMsg');
+  const F = letterFigures();
+  const inputs = composeInputs(F);
+  const draft = window.LetterComposer.compose(inputs);
+  if (draft.derived) F.all = F.all.concat(draft.derived);
+  const text = letterText(draft);
+  const flagged = scanLetter(text, F);
+  const prompt = buildLetterPrompt(F);
+  msg.textContent = draft.words.toLocaleString() + ' words \u2014 ' + draft.positionLabel + '.';
+
+  const missing = [];
+  if (!inputs.companyType) missing.push('company type');
+  if (!inputs.naics) missing.push('your NAICS code');
+  if (!inputs.displacement) missing.push('your displacement figure');
+
+  out.innerHTML =
+    (missing.length ? '<div class="note warn"><b>Fill in ' + missing.join(', ')
+      + ' for a complete draft.</b> The letter is written around your own figures; the '
+      + 'placeholders left in the text mark where they belong.</div>' : '')
+    + (flagged.length ? '<div class="note warn"><b>' + flagged.length + ' figure(s) in the draft '
+      + 'do not trace to your authorized list.</b> ' + flagged.map(f => esc(f.token)).join(', ')
+      + '</div>' : '')
+    + '<div class="note stop"><b>Read it, then rewrite sections 2 and 4 in your own words.</b> '
+    + 'Those two sections argue from the rulemaking record, so every filer choosing this '
+    + 'position will produce similar text, and agencies discount identical submissions as a form '
+    + 'campaign. Sections 1, 3 and 5 are built from your own figures and are already specific to '
+    + 'you. This comment is filed under your name and states your position, not the position of '
+    + 'whoever built this tool \u2014 do not file anything you would not have written.</div>'
+    + '<div class="row"><button class="gold" id="dlLetter">Download the comment (.docx)</button>'
+    + '<button class="ghost" id="showLetter">Read it here</button>'
+    + '<button class="ghost" id="copyPrompt">Copy the prompt for an AI</button>'
+    + '<a href="https://claude.ai/new" target="_blank" rel="noopener"><button class="ghost">'
+    + 'Open Claude</button></a>'
+    + '<a href="https://chatgpt.com" target="_blank" rel="noopener"><button class="ghost">'
+    + 'Open ChatGPT</button></a></div>'
+    + '<div class="hint" style="margin-top:8px">The draft above is complete and needs no '
+    + 'account. If you would rather have an AI rewrite it in your own voice, copy the prompt '
+    + '\u2014 it already contains your figures and the instruction to cite nothing else.</div>'
+    + '<div id="letterText" style="display:none;white-space:pre-wrap;background:#fff;'
+    + 'border:1px solid var(--line);border-radius:4px;padding:16px;margin-top:12px;'
+    + 'font-size:14px;max-height:440px;overflow:auto"></div>';
+
+  document.getElementById('dlLetter').onclick = () =>
+    letterDocx(draft, F, flagged).then(b => save(b, 'sba_comment_draft_' + stamp() + '.docx', text))
+      .catch(e => alert('The document could not be built: ' + e.message));
+  document.getElementById('showLetter').onclick = () => {
+    const el = document.getElementById('letterText');
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    el.textContent = text;
+  };
+  document.getElementById('copyPrompt').onclick = async (ev) => {
+    try { await navigator.clipboard.writeText(prompt);
+      ev.target.textContent = 'Prompt copied'; }
+    catch (e) {
+      D.pack(D.build([D.para({ runs: [{ t: 'SBA comment \u2014 drafting prompt and figures',
+          b: true, sz: 28 }], after: 200 })].concat(
+        prompt.split('\n').map(l => D.para({ runs: [{ t: l, sz: 20 }], after: 40, line: 250 })))
+        .join(''), {})).then(b => save(b, 'sba_comment_prompt_' + stamp() + '.docx', prompt));
+      ev.target.textContent = 'Downloaded instead';
+    }
+  };
+});
+})();
+</script>
+</body>
+</html>
