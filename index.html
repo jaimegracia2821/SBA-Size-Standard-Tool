@@ -157,7 +157,7 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
       standard moves.</p>
   </div>
   <ol class="steps" id="steps">
-    <li data-s="0" class="on"><span class="n">1</span><span>Load spending data</span></li>
+    <li data-s="0" class="on"><span class="n">1</span><span>Enter your NAICS codes</span></li>
     <li data-s="1"><span class="n">2</span><span>Set scope and standards</span></li>
     <li data-s="2"><span class="n">3</span><span>Run the analysis</span></li>
     <li data-s="3"><span class="n">4</span><span>Results and downloads</span></li>
@@ -181,43 +181,76 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
 <main>
 <!-- 1 -->
 <section class="pane on" id="p0">
-  <h2>Load your spending data</h2>
-  <p class="sub">Drop the ZIP you downloaded from USAspending, or the CSV from inside it.
-    Nothing is uploaded — the file is read here in your browser.</p>
-  <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose a file">
-    <strong>Drop your file here</strong>
-    <small>or click to browse — .zip or .csv</small>
-    <input type="file" id="file" accept=".csv,.zip" hidden>
-  </div>
-  <div id="loadStatus"></div>
-  <div class="note"><b>Or skip the download.</b> Enter the NAICS codes you want and a
-    prepared dataset is assembled from the same federal award data, already rolled up to
-    parent companies.
-    <div style="margin-top:8px"><label for="preCodes">NAICS codes</label>
-      <input type="text" id="preCodes"
-             value="541611,541612,541613,541614,541618,541620,541690"
-             placeholder="541611,541612"></div>
-    <button class="ghost" style="padding:5px 12px;font-size:13px;margin-top:8px" id="loadPre">
-    Load these codes</button>
+  <h2>Enter your NAICS codes</h2>
+  <p class="sub">The federal award data is already loaded. Type the codes you compete in and
+    the analysis runs against a prepared dataset — no download, no file to upload.</p>
+
+  <div class="card">
+    <label for="preCodes">NAICS codes</label>
+    <input type="text" id="preCodes"
+           placeholder="e.g. 541611, 541612, 541613 (separate NAICS codes by comma)">
     <div class="hint" id="preHint">Prepared by <b>MakeGov</b> from the Federal Procurement Data
-      System and SAM.gov entity registrations. Only the codes are sent — no file is uploaded and
-      nothing about you is transmitted. Codes measured by employee count are unavailable, because
-      headcount does not appear in award data. Use the USAspending path above to work from an
-      extract you pulled yourself.</div></div>
+      System and SAM.gov entity registrations, already rolled up to parent companies. Only the
+      codes you type are sent — no file is uploaded and nothing about you is transmitted. Codes
+      measured by employee count cannot be analyzed, because headcount does not appear in award
+      data.</div>
+    <div class="row" style="margin-top:14px">
+      <button class="gold" id="loadPre">Continue</button>
+    </div>
+  </div>
+
+  <div id="loadStatus"></div>
+
   <div class="note warn" id="frameWarn" style="display:none"><b>You are viewing this inside a
     frame.</b> The analysis will run normally, but browsers block file downloads from framed
     pages, so the download buttons at the end may do nothing.
     <button class="ghost" style="padding:5px 12px;font-size:13px;margin-top:8px" id="popTop">
     Open in its own tab</button></div>
+
   <div class="note stop"><b>Before you start.</b> This tool estimates from federal contract
     dollars. Size standards are based on total company revenue, including commercial work,
     subcontracts, and affiliated companies — none of which appear in this data. Results are a
     list of candidates worth investigating, never a determination of who is small. Not legal
     advice.</div>
-  <div class="note"><b>Which file to download from USAspending.</b> Award Search → Advanced
-    Search → Download → Custom Award Data. Choose <b>Contracts</b> and
-    <b>Prime Award Transactions</b>, not the award summaries. Set the date range to five full
-    federal fiscal years (October 1 through September 30).</div>
+
+  <details style="margin-top:18px">
+    <summary style="cursor:pointer;color:var(--navy);font-size:13.5px;font-weight:700">
+      Prefer to use your own USAspending extract?</summary>
+    <div style="margin-top:12px">
+      <p class="hint" style="margin-bottom:12px">Use this if you need a scope, date range, or
+        reporting-delay cutoff the prepared dataset does not cover. The file is read in your
+        browser and never uploaded.</p>
+      <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose a file">
+        <strong>Drop your file here</strong>
+        <small>or click to browse — .zip or .csv</small>
+        <input type="file" id="file" accept=".csv,.zip" hidden>
+      </div>
+      <div class="note"><b>Which file to download from USAspending.</b> Award Search → Advanced
+        Search → Download → Custom Award Data. Choose <b>Contracts</b> and
+        <b>Prime Award Transactions</b>, not the award summaries. Set the date range to five full
+        federal fiscal years (October 1 through September 30).</div>
+    </div>
+  </details>
+
+  <p class="disc">Disclaimer. This tool is provided by The Wolverine Group, Inc. for general
+  informational and educational purposes only. It reflects business and practitioner guidance,
+  not legal, financial, or tax advice, and it does not create an attorney-client, advisory, or
+  fiduciary relationship of any kind. The tool produces estimates derived from public federal
+  spending data; it does not and cannot determine any firm's size status under the Small
+  Business Act or 13 CFR Part 121, and its output is not a size determination, a size
+  certification, or a substitute for either. Size standards, size determinations, affiliation,
+  and eligibility rest with the U.S. Small Business Administration and the contracting officer,
+  and turn on facts not present in this data, including total receipts from all sources and the
+  applicable regulation as then in effect. Proposed rules are subject to change or withdrawal
+  and confer no rights; nothing here should be read as a recommendation to alter a size
+  representation, certification, teaming arrangement, or bid strategy. Any regulatory
+  submission, teaming agreement, or business decision informed by this material should be
+  reviewed by qualified legal counsel and, where appropriate, a financial or tax professional,
+  before action is taken, and every threshold and citation should be verified against primary
+  sources. The Wolverine Group, Inc. makes no representations or warranties as to the accuracy,
+  completeness, or suitability of this material for your situation, and disclaims, to the
+  fullest extent permitted by law, any liability for decisions made or actions taken in reliance
+  on it. You remain solely responsible for your own business decisions.</p>
 </section>
 
 <!-- 2 -->
@@ -1378,11 +1411,12 @@ $('#loadPre').addEventListener('click', async () => {
       + m.fy_window[m.fy_window.length - 1] + '.<div class="hint">Prepared by ' + (m.prepared_by || 'MakeGov') + ', built '
       + m.generated + ' from ' + m.source + '. Parent companies: ' + m.parent_source + '. Companies below $'
       + (m.floor / 1e6).toFixed(0) + 'M in the window are not included.</div></div>');
+    btn.disabled = false;
     buildScopePane();
   } catch (err) {
     btn.disabled = false;
     status('<div class="note warn"><b>That dataset could not be loaded.</b> '
-      + err.message + '<div class="hint">Use the USAspending path above instead.</div></div>');
+      + err.message + '<div class="hint">Use the USAspending path below instead.</div></div>');
   }
 });
 
