@@ -1974,15 +1974,34 @@ function letterFigures() {
   if (disp) firm.push(['F4', 'Set-aside obligations we project at risk of displacement', disp, 'usd']);
   const record = [
     ['R1', 'Industries where SBA\u2019s own analysis supported a decrease but none is proposed', 45, 'count'],
-    ['R2', 'Net increase in firms classified as small under the proposal', 114541, 'count'],
-    ['R3', 'Firms holding FY2025 contracts that would become newly eligible', 37002, 'count'],
-    ['R4', 'FY2025 obligations held by those firms', 71000000000, 'usd'],
+    ['R2', 'Net increase in firms classified as small under the proposal (proposed rule, '
+      + '91 FR 53741)', 114541, 'count'],
+    ['R3', 'Firms holding FY2025 contracts that would become newly eligible (proposed rule\u2019s '
+      + 'original estimate, since revised by SBA; see R8\u2013R10)', 37002, 'count'],
+    ['R4', 'FY2025 obligations held by those firms (proposed rule\u2019s original estimate)',
+      71000000000, 'usd'],
     ['R5', 'Receipts-based size standards under current rules', 496, 'count'],
     ['R6', 'Receipts-based size standards under the proposal', 129, 'count'],
-    ['R7', 'Receipts averaging period for federal contracting (13 CFR 121.104)', 5, 'count']
+    ['R7', 'Receipts averaging period for federal contracting (13 CFR 121.104)', 5, 'count'],
+    /* SBA revised its contractor estimate after the proposed rule. These replace R3 as SBA's
+       current figures; R3 and R4 stay so a filer citing the rule's own number can source it. */
+    ['R8', 'Active federal contractors not currently small in any industry that could gain small '
+      + 'status (SBA revised estimate, ' + IMPACT_REPORT + ')', 1523, 'count'],
+    ['R9', 'Active federal contractors already small in some industries that could become small '
+      + 'in additional industries (SBA revised estimate, ' + IMPACT_REPORT + ')', 1401, 'count'],
+    ['R10', 'Active federal contractors that could benefit from new or expanded small-business '
+      + 'eligibility (SBA revised estimate, ' + IMPACT_REPORT + ')', 2924, 'count'],
+    ['R11', 'Small entities that could gain small status, low end of range; includes nonprofits '
+      + 'and local governments (SBA Office of Advocacy, 17 September 2026)', 4000, 'count'],
+    ['R12', 'Same estimate, high end of range (SBA Office of Advocacy, 17 September 2026)',
+      6000, 'count']
   ];
   return { run, firm, record, all: run.concat(firm, record) };
 }
+
+const IMPACT_REPORT = 'Proposed Size Standard Impact Assessment, 1 October 2026';
+const IMPACT_REPORT_URL = 'https://legacy.sba.gov/sites/default/files/2026-10/'
+  + 'Proposed%20Size%20Standard%20Impact%20Assessment%20Report.pdf';
 
 const fmtFig = (v, kind) => kind === 'usd' ? money(v) : (kind === 'pct' ? v + ' percent' : String(v));
 
@@ -2027,7 +2046,15 @@ function buildLetterPrompt(F) {
     + cfg.scope.join(', ') + ' over ' + cfg.fyWindow.map(y => 'FY' + y).join(', ')
     + '. They are federal prime contract obligations, not receipts under 13 CFR 121.104. '
     + 'Figures beginning F were supplied by the filer. Figures beginning R are from the '
-    + 'published record of the proposed rule.';
+    + 'rulemaking record, and each names its source in its label: the proposed rule '
+    + '(91 FR 53741), SBA\u2019s ' + IMPACT_REPORT + ' (' + IMPACT_REPORT_URL + '), or the SBA '
+    + 'Office of Advocacy (17 September 2026).\n\n'
+    + 'IMPACT ESTIMATES: R3, R8 to R10, and R11 to R12 are different estimates of who would '
+    + 'gain small status, from different sources and measuring different populations. Whenever '
+    + 'you cite one, name its source in the same sentence. Do not present R3 or R4 as SBA\u2019s '
+    + 'current estimate without saying SBA has since revised it. Do not compare R11 to R12 '
+    + 'with R3; Advocacy\u2019s range counts small entities including nonprofits and local '
+    + 'governments, not federal contractors.';
 }
 
 /* Flag any number in the draft that does not trace to the authorized figures. */
@@ -2084,7 +2111,8 @@ function letterDocx(bodyText, F, flagged) {
   body.push(D.para({ runs: [{ t: 'Figures beginning A were computed from USAspending prime '
     + 'contract transactions and are federal contract obligations, not receipts under 13 CFR '
     + '121.104. Figures beginning F were supplied by the filer. Figures beginning R are from '
-    + 'the published record of the proposed rule. Verify each against its source before filing.',
+    + 'the rulemaking record; each names its source, and SBA\u2019s ' + IMPACT_REPORT
+    + ' is at ' + IMPACT_REPORT_URL + '. Verify each against its source before filing.',
     sz: 19, i: true }], after: 0 }));
   return D.pack(D.build(body.join(''), { top: 1440, bottom: 1440, left: 1440, right: 1440 }));
 }
@@ -2141,7 +2169,8 @@ function letterDocx(draft, F, flagged) {
   body.push(D.para({ runs: [{ t: 'Figures beginning A were computed from USAspending prime '
     + 'contract transactions and are federal contract obligations, not receipts under 13 CFR '
     + '121.104. Figures beginning F were supplied by the filer. Figures beginning R are from '
-    + 'the published record of the proposed rule. Verify each against its source before filing.',
+    + 'the rulemaking record; each names its source, and SBA\u2019s ' + IMPACT_REPORT
+    + ' is at ' + IMPACT_REPORT_URL + '. Verify each against its source before filing.',
     sz: 19, i: true }], after: 0 }));
   body.push(D.para({ runs: [{ t: 'File at regulations.gov, Docket SBA-2026-0199, by '
     + COMMENTS_CLOSE + ' (https://www.regulations.gov/commenton/SBA-2026-0199-2726). '
