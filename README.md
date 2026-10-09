@@ -1,4 +1,4 @@
- # NAICS Size Standard Impact Tool
+# NAICS Size Standard Impact Tool
 
 Find the federal contractors whose small-business status would change when an SBA size
 standard moves — and draft a comment to SBA about it.
@@ -95,19 +95,39 @@ Two things the tool does to protect the filing:
   rulemaking record will read alike across filers, and agencies discount identical submissions
   as a form campaign.
 
-**Comments on Docket SBA-2026-0199 close September 21, 2026.** Check
-[regulations.gov](https://www.regulations.gov) for current status.
+### Where and when to file
+
+**Comments close November 20, 2026.** SBA extended both comment periods by 60 days from the
+original September 21 date ([91 FR 60524](https://www.federalregister.gov/d/2026-19546),
+September 24, 2026).
+
+- **Size standards (Docket SBA-2026-0199):** the comment form on the original August 20 notice
+  is disabled. Use the form from the extension notice:
+  [regulations.gov/commenton/SBA-2026-0199-2726](https://www.regulations.gov/commenton/SBA-2026-0199-2726).
+- **Methodology (Docket SBA-2026-0265):** arguments about how SBA derived the standards belong
+  here as well: [regulations.gov/docket/SBA-2026-0265](https://www.regulations.gov/docket/SBA-2026-0265).
+- **RIN 3245-AI67** — a capital letter I, not the digit 1. It goes in the subject line of any
+  confidential business information emailed to SBA.
+
+**Two impact estimates are now in the record, and they disagree.** The proposed rule estimates
+a net 114,541 firms newly classified as small, including 37,002 holding FY2025 contracts. On
+September 17, 2026, SBA's Office of Advocacy estimated that 4,000 to 6,000 current contractors
+would gain small business status. If your comment cites either, name its source. The drafting
+prompt instructs an AI drafter to do the same.
+
+Check the docket for current status before you file. Deadlines and links can change again.
 
 ---
 
 ## Privacy
 
-Your file is read inside your browser and nothing is transmitted anywhere. There is no server,
-no analytics, and no logging. That means the tool can be used with sensitive pipeline data, and
+If you upload your own USAspending file, it is read inside your browser and nothing is
+transmitted anywhere. If you type NAICS codes instead, only those codes are sent, to fetch the
+prepared dataset from MakeGov. There is no TWG server, no analytics, and no logging. That means the tool can be used with sensitive pipeline data, and
 it means nobody but you holds a copy of what you analyzed. Closing the tab discards everything.
 
 You can also download `index.html` and open it from your own disk — it works offline apart from
-three libraries it loads from a CDN.
+two libraries it loads from a CDN.
 
 ---
 
@@ -136,7 +156,7 @@ XML with no additional dependency.
 Copyright © 2026 The Wolverine Group, Inc. All rights reserved.
 
 Provided free of charge for use in analyzing and commenting on SBA Docket SBA-2026-0199 and the
-companion methodology docket SBA-2026-0265.
+companion methodology docket SBA-2026-0265. Comments close November 20, 2026.
 
 ---
 
