@@ -87,7 +87,17 @@ Below the draft, a **How to file** section gives the deadline, a link to the com
 - **By mail or hand delivery:** Ryan Lambert, Associate Administrator, Office of Industrial Base Resilience & Contracting, 409 Third Street SW, Mail Code 6530, Washington, DC 20416. Reference RIN 3245-AI67 or Docket No. SBA-2026-0199.
 - **Confidential business information:** email it separately to GCBDregs@sba.gov, marked and explained. Use "RIN 3245-AI67" in the subject line for the size standards docket — **a capital letter I, not the digit 1** — and "2026 Revised Methodology" for the methodology docket.
 
-**Two impact estimates are now in the record, and they disagree.** The proposed rule estimates a net 114,541 firms newly classified as small, including 37,002 holding FY2025 contracts. On September 17, 2026, SBA's Office of Advocacy estimated that 4,000 to 6,000 current contractors would gain small business status. If your comment cites either, name its source.
+**Three impact estimates are now in the record, and they measure different things.**
+
+| Source | Estimate |
+|---|---|
+| Proposed rule ([91 FR 53741](https://www.federalregister.gov/documents/2026/08/20/2026-17042/small-business-size-standards), August 20, 2026) | A net 114,541 firms newly classified as small, including 37,002 holding FY2025 contracts |
+| SBA Office of Advocacy (September 17, 2026) | 4,000 to 6,000 small entities could gain small status — a count that includes nonprofits and local governments, not only contractors |
+| SBA [Proposed Size Standard Impact Assessment](https://legacy.sba.gov/sites/default/files/2026-10/Proposed%20Size%20Standard%20Impact%20Assessment%20Report.pdf) (October 1, 2026) | 1,523 active federal contractors not currently small in any industry could gain small status; 1,401 already small in some industries could become small in more; 2,924 in total. SBA derived these by limiting Advocacy's estimate to for-profit businesses |
+
+SBA's October figures revise the 37,002 in the proposed rule. If your comment cites any of these, name its source, and don't present the 37,002 as SBA's current estimate. The tool's comment drafter lists all three with their sources, and its AI drafting prompt requires the same.
+
+**SBA also asked for comment on four specific questions** in the October 1 assessment: whether to keep the employee or receipts designation of individual exceptions; whether to set the size standard of retained exceptions in line with the relevant increase; whether to keep footnotes; and whether to update the 500-employee nonmanufacturer size standard in 13 CFR 121.406(b) to reflect the proposed employee-based standards.
 
 Check the docket for current status before you file. Deadlines and links can change again.
 
