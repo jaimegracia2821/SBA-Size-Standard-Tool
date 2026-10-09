@@ -113,6 +113,11 @@ button.gold{background:var(--gold);border-color:var(--gold);color:#22190A}
 button.gold:hover{filter:brightness(1.07)}
 button[disabled]{opacity:.45;cursor:not-allowed}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:22px}
+a.btn{display:inline-block;font:600 14px var(--sans);padding:11px 20px;border-radius:3px;
+  border:1px solid var(--gold);background:var(--gold);color:#22190A;text-decoration:none}
+a.btn:hover{filter:brightness(1.07)}
+a.btn.ghost{background:transparent;border-color:var(--navy);color:var(--navy)}
+a.btn.ghost:hover{background:#EAEEF5;filter:none}
 
 .bar{height:5px;background:var(--line);border-radius:3px;overflow:hidden;margin:14px 0 8px}
 .bar i{display:block;height:100%;background:var(--gold);width:0}
@@ -370,6 +375,39 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
       <span id="letterMsg" class="hint" style="margin:0"></span>
     </div>
     <div id="letterOut"></div>
+  </div>
+
+  <h3>How to file</h3>
+  <div class="card">
+    <p style="margin-top:0"><b>Comments close <span class="js-close">20 November 2026</span>.</b>
+      SBA extended the original 21 September deadline by 60 days for both dockets
+      (91 FR 60524, 24 September 2026). Comments are posted publicly.</p>
+    <div class="row" style="margin-top:14px">
+      <a class="btn" href="https://www.regulations.gov/commenton/SBA-2026-0199-2726"
+         target="_blank" rel="noopener">File on regulations.gov &rarr;</a>
+      <a class="btn ghost" href="https://www.regulations.gov/docket/SBA-2026-0265"
+         target="_blank" rel="noopener">Methodology docket &rarr;</a>
+    </div>
+    <div class="grid" style="margin-top:20px">
+      <div><label>Online</label>
+        <p class="hint" style="margin-top:0">Use the button above. If you navigate there yourself,
+          search for Docket No. SBA-2026-0199 or RIN 3245-AI67. The comment link on the original
+          20 August Federal Register notice no longer works.</p></div>
+      <div><label>By mail or hand delivery</label>
+        <p class="hint" style="margin-top:0">Ryan Lambert, Associate Administrator, Office of
+          Industrial Base Resilience &amp; Contracting, 409 Third Street SW, Mail Code 6530,
+          Washington, DC 20416. Reference RIN 3245-AI67 or Docket No. SBA-2026-0199.</p></div>
+    </div>
+    <div class="note" style="margin-bottom:0"><b>Confidential business information.</b> Send it
+      separately to GCBDregs@sba.gov with &ldquo;RIN 3245-AI67&rdquo; in the subject line (a
+      capital letter I, not the digit 1), marked and explained, for SBA to review before any
+      release.</div>
+    <div class="note" style="margin-bottom:0"><b>The methodology has its own docket.</b>
+      Arguments about how SBA derived the standards &mdash; including the removal of the ceiling,
+      the productivity adjustment, and the shift to employee-based standards &mdash; also belong
+      on Docket SBA-2026-0265, which closes the same day. For confidential business information
+      on the methodology, email GCBDregs@sba.gov with &ldquo;2026 Revised Methodology&rdquo; in
+      the subject line.</div>
   </div>
 
   <h3>Companies in the band</h3>
@@ -1288,6 +1326,7 @@ const LOGO_URI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXwAAADgCAMAAAA3
 /* Extended from 21 September by 91 FR 60524 (24 September 2026). The prepared
    dataset carries its own comments_close field; this constant is what the page shows. */
 const COMMENTS_CLOSE = '20 November 2026';
+document.querySelectorAll('.js-close').forEach(el => { el.textContent = COMMENTS_CLOSE; });
 const COPYRIGHT = '(c) 2026 The Wolverine Group, Inc. All rights reserved.';
 const GRANT = 'Provided free of charge for use in analyzing and commenting on SBA Docket '
   + 'SBA-2026-0199. Comments close ' + COMMENTS_CLOSE + '.';
@@ -2104,6 +2143,10 @@ function letterDocx(draft, F, flagged) {
     + '121.104. Figures beginning F were supplied by the filer. Figures beginning R are from '
     + 'the published record of the proposed rule. Verify each against its source before filing.',
     sz: 19, i: true }], after: 0 }));
+  body.push(D.para({ runs: [{ t: 'File at regulations.gov, Docket SBA-2026-0199, by '
+    + COMMENTS_CLOSE + ' (https://www.regulations.gov/commenton/SBA-2026-0199-2726). '
+    + 'Arguments about the methodology also belong on Docket SBA-2026-0265.',
+    sz: 19, b: true }], before: 160, after: 0 }));
   return D.pack(D.build(body.join(''), { top: 1440, bottom: 1440, left: 1440, right: 1440 }));
 }
 
