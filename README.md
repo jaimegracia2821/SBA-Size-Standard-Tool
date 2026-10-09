@@ -61,7 +61,7 @@ On this path, size is measured on obligations in the selected codes only, becaus
 
 The tool will not guess a size standard it doesn't have. Codes that look closely related often carry different standards — within the management consulting group alone the current figures range from $19.0M to $29.0M — and a wrong threshold produces a plausible-looking list of the wrong companies. Every standard you enter by hand must carry a stated source.
 
-Full instructions are in the [User Guide](https://github.com/jaimegracia2821/SBA-Size-Standard-Tool/blob/main/TWG_Size_Standard_Tool_User_Guide.docx).
+Full instructions are in the [User Guide](https://github.com/jaimegracia2821/SBA-Size-Standard-Tool/blob/main/TWG_Size_Standard_Tool_User_Guide.pdf) (PDF).
 
 ## Commenting on a proposed rule
 
